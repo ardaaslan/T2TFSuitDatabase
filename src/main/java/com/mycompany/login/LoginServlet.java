@@ -70,7 +70,11 @@ public class LoginServlet extends HttpServlet {
             rs.forward(request, response);
         } else {
             RequestDispatcher rs = request.getRequestDispatcher("index.html");
-            out.println("<h4><center>Invalid Username or Password</center></h4>");
+            out.println("<h4>");
+            out.println("<center>");
+            out.println("Invalid Username or Password");
+            out.println("</center>");
+            out.println("</h4>");
             rs.include(request, response);
         }
     }

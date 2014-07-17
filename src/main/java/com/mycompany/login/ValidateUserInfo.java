@@ -9,18 +9,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author OnurYilmaz
  */
 public class ValidateUserInfo {
-
-    private String user = "root";
-    private String password = "30081992";
-    private String host = "localhost";
-    private String database = "test";
-    private int port = 3306;
 
     public static boolean checkUser(String name, String pass) {
         boolean st = false;
@@ -36,7 +31,7 @@ public class ValidateUserInfo {
             ResultSet rs = ps.executeQuery();
             st = rs.next();
 
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.toString());
         }
 
