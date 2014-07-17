@@ -65,25 +65,64 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (ValidateUserInfo.checkUser(username, password)) {
-            RequestDispatcher rs = request.getRequestDispatcher("MainPageServlet");
-            rs.forward(request, response);
-        } else {
+        // <editor-fold defaultstate="collapsed" desc="If a client do not enter valid username or password">
+        if(username.length() == 0) /*If a client do not enter your user name*/
+        {
             RequestDispatcher rs = request.getRequestDispatcher("index.html");
             out.println("<font color=");
             out.println('"');
             out.println("red");
             out.println('"');
             out.println('>');
-            
+
             out.println("<h5>");
             out.println("<center>");
-            out.println("Invalid Username or Password");
+            out.println("Please Enter Your Username");
             out.println("</center>");
             out.println("</h5>");
-            
+
             out.println("</font>");
             rs.include(request, response);
+        }
+        else if(password.length() == 0) /*If a client do not enter your password*/
+        {
+            RequestDispatcher rs = request.getRequestDispatcher("index.html");
+            out.println("<font color=");
+            out.println('"');
+            out.println("red");
+            out.println('"');
+            out.println('>');
+
+            out.println("<h5>");
+            out.println("<center>");
+            out.println("Please Enter Your Password");
+            out.println("</center>");
+            out.println("</h5>");
+
+            out.println("</font>");
+            rs.include(request, response);
+        }// </editor-fold>
+        else{
+            if (ValidateUserInfo.checkUser(username, password)) {
+                RequestDispatcher rs = request.getRequestDispatcher("MainPageServlet");
+                rs.forward(request, response);
+            } else {
+                RequestDispatcher rs = request.getRequestDispatcher("index.html");
+                out.println("<font color=");
+                out.println('"');
+                out.println("red");
+                out.println('"');
+                out.println('>');
+
+                out.println("<h5>");
+                out.println("<center>");
+                out.println("Invalid Username or Password");
+                out.println("</center>");
+                out.println("</h5>");
+
+                out.println("</font>");
+                rs.include(request, response);
+            }
         }
     }
 
