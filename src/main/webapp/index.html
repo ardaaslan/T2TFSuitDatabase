@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Welcome to T2TF</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Welcome to T2TF</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" media="screen"/>
     </head>
     <body>
-    <center>
-        <form method="post" action="LoginServlet">
-            User Name:<input type="text" name="username" /><br/>
-            Password:<input type="password" name="password" /><br/>
-            <input type="submit" value="login" />
-        </form>
-    </center>
+    	<center>
+	        <div class="container">
+	        	<div class="row" id="main-content">
+	        		<div class="span4" id="sidebar">
+	        			<div class="well">
+	        				<form method="post" action="LoginServlet">
+	        					<fieldset>
+	        						<legend>Login</legend>
+	        						<input type="text" class = "input-block-level" name="username" placeholder="username">
+	        						<input type="password" class = "input-block-level" name="password" placeholder="password">
+	        						<input type="submit" class="btn btn-primary" value="login">
+	        					</fieldset>
+	        				</form>
+	        			</div>
+	        		</div>
+	        	</div>
+	        </div>
+		</center>
+        <script type="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="js/bootstrap.js"></script>
+
     </body>
+    
 </html>
