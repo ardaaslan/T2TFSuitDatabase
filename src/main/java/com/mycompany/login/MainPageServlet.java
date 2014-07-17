@@ -64,7 +64,7 @@ public class MainPageServlet extends HttpServlet {
             throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = response.getWriter();
-                out.println("Welcome to T2TF Main Page");
+                out.println("<h2><center>Welcome to T2TF Main Page</center></h2>");
     }
 
     /**

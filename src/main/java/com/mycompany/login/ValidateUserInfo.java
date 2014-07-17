@@ -16,22 +16,28 @@ import java.sql.ResultSet;
  */
 public class ValidateUserInfo {
 
+    private String user = "root";
+    private String password = "30081992";
+    private String host = "localhost";
+    private String database = "test";
+    private int port = 3306;
+
     public static boolean checkUser(String name, String pass) {
         boolean st = false;
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
-                        
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test",
-                    "root", "30081992");
 
-            PreparedStatement ps = conn.prepareStatement("select * from users where userName=" + name
-                    + " and password=" + pass);
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test",
+                    "root", "");
+
+            PreparedStatement ps = con.prepareStatement("select * from users where userName='" + name
+                    + "' and password='" + pass + "'");
 
             ResultSet rs = ps.executeQuery();
             st = rs.next();
 
         } catch (Exception e) {
+            System.out.println(e.toString());
         }
 
         return st;
