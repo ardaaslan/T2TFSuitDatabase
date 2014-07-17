@@ -29,11 +29,10 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     /*protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+     throws ServletException, IOException {
+     response.setContentType("text/html;charset=UTF-8");
         
-    }*/
-
+     }*/
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,19 +61,16 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        if(username.equals("admin") && password.equals("admin"))
-        {
+
+        if (ValidateUserInfo.checkUser(username, password)) {
             RequestDispatcher rs = request.getRequestDispatcher("MainPageServlet");
             rs.forward(request, response);
-        }
-        else
-        {
-            out.println("Invalid Username or Password");
+        } else {
             RequestDispatcher rs = request.getRequestDispatcher("index.html");
+            out.println("<h4><center>Invalid Username or Password</center></h4>");
             rs.include(request, response);
         }
     }
