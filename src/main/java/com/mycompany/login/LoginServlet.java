@@ -108,19 +108,14 @@ public class LoginServlet extends HttpServlet {
                 rs.forward(request, response);
             } else {
                 RequestDispatcher rs = request.getRequestDispatcher("index.html");
-                out.println("<font color=");
-                out.println('"');
-                out.println("red");
-                out.println('"');
-                out.println('>');
 
-                out.println("<h5>");
                 out.println("<center>");
-                out.println("Invalid Username or Password");
+                out.println("<div class=\"alert alert-danger\" role=\"alert\">");
+                out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>' +
+                        "Invalid Username or Password" + "</a>");
+                out.println("</div>");
                 out.println("</center>");
-                out.println("</h5>");
-
-                out.println("</font>");
+                
                 rs.include(request, response);
             }
         }
