@@ -114,8 +114,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>' +
                         "Invalid Username or Password" + "</a>");
                 out.println("</div>");
-                out.println("</center>");
-                
+                out.println("</center>");                
                 rs.include(request, response);
             }
         }
