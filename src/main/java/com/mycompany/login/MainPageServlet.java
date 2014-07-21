@@ -8,6 +8,7 @@ package com.mycompany.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +50,7 @@ public class MainPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+            
     }
 
     /**
@@ -63,8 +65,8 @@ public class MainPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = response.getWriter();
-                out.println("<h2><center>Welcome to T2TF Main Page</center></h2>");
+                RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
+                rs.forward(request, response);
     }
 
     /**
