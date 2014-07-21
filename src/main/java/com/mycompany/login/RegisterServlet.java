@@ -53,8 +53,8 @@ public class RegisterServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test",
-                    "root", "CAKIN");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test",
+                    "root", "");
 
             String command ="insert into users values('"+username+"','"+password+"')";
             
@@ -66,8 +66,8 @@ public class RegisterServlet extends HttpServlet {
             System.out.println(e.toString());
             }
         flag = 0;
-        RequestDispatcher rs = request.getRequestDispatcher("index.html");
-        rs.forward(request, response);
+        
+        response.sendRedirect("LoginServlet");
         }
     }
 }
