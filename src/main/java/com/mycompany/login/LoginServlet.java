@@ -106,18 +106,19 @@ public class LoginServlet extends HttpServlet {
             out.println("</font>");
             rs.include(request, response);
         }// </editor-fold>
-        else {
+        else
+        {
             if (ValidateUserInfo.checkUser(username, password)) {
                 response.sendRedirect("MainPageServlet");
             } else {
                 RequestDispatcher rs = request.getRequestDispatcher("index.html");
 
-                System.out.println("<center>");
-                System.out.println("<div class=\"alert alert-danger\" role=\"alert\">");
-                System.out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>'
+                out.println("<center>");
+                out.println("<div class=\"alert alert-danger\" role=\"alert\">");
+                out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>'
                         + "Invalid Username or Password" + "</a>");
-                System.out.println("</div>");
-                System.out.println("</center>");    
+                out.println("</div>");
+                out.println("</center>");    
                 
                 rs.include(request, response);
             }
