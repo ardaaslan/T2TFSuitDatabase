@@ -33,8 +33,7 @@ public class MainPageServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
-            rs.forward(request, response);
+            
         }
     }
 
@@ -51,7 +50,8 @@ public class MainPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-            
+            RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
+            rs.forward(request, response);
     }
 
     /**

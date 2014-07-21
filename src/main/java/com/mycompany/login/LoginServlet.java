@@ -49,6 +49,10 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        
+        RequestDispatcher rs = request.getRequestDispatcher("index.html");
+        rs.forward(request, response);
+        
     }
 
     /**
@@ -104,8 +108,7 @@ public class LoginServlet extends HttpServlet {
         }// </editor-fold>
         else {
             if (ValidateUserInfo.checkUser(username, password)) {
-                RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
-                rs.forward(request, response);
+                response.sendRedirect("MainPageServlet");
             } else {
                 RequestDispatcher rs = request.getRequestDispatcher("index.html");
 

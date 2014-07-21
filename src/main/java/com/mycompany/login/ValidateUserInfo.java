@@ -22,8 +22,8 @@ public class ValidateUserInfo {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test",
-                    "root", "CAKIN");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test",
+                    "root", "");
 
             PreparedStatement ps = con.prepareStatement("select * from users where userName='" + name
                     + "' and password='" + pass + "'");
