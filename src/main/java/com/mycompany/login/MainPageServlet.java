@@ -29,13 +29,14 @@ public class MainPageServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    /*protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
+            rs.forward(request, response);
         }
-    }*/
+    }
 
     // <editor-fold>
     /**
@@ -65,8 +66,7 @@ public class MainPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
-                RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
-                rs.forward(request, response);
+                
     }
 
     /**

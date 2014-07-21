@@ -7,6 +7,7 @@ package com.mycompany.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,12 +29,14 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    /*protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-     throws ServletException, IOException {
-     response.setContentType("text/html;charset=UTF-8");
-        
-     }*/
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -66,8 +69,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         // <editor-fold defaultstate="collapsed" desc="If a client do not enter valid username or password">
-        if(username.length() == 0) /*If a client do not enter your user name*/
-        {
+        if (username.length() == 0) /*If a client do not enter your user name*/ {
             RequestDispatcher rs = request.getRequestDispatcher("index.html");
             out.println("<font color=");
             out.println('"');
@@ -83,9 +85,7 @@ public class LoginServlet extends HttpServlet {
 
             out.println("</font>");
             rs.include(request, response);
-        }
-        else if(password.length() == 0) /*If a client do not enter your password*/
-        {
+        } else if (password.length() == 0) /*If a client do not enter your password*/ {
             RequestDispatcher rs = request.getRequestDispatcher("index.html");
             out.println("<font color=");
             out.println('"');
@@ -102,19 +102,20 @@ public class LoginServlet extends HttpServlet {
             out.println("</font>");
             rs.include(request, response);
         }// </editor-fold>
-        else{
+        else {
             if (ValidateUserInfo.checkUser(username, password)) {
-                RequestDispatcher rs = request.getRequestDispatcher("MainPageServlet");
+                RequestDispatcher rs = request.getRequestDispatcher("homepage.html");
                 rs.forward(request, response);
             } else {
                 RequestDispatcher rs = request.getRequestDispatcher("index.html");
 
-                out.println("<center>");
-                out.println("<div class=\"alert alert-danger\" role=\"alert\">");
-                out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>' +
-                        "Invalid Username or Password" + "</a>");
-                out.println("</div>");
-                out.println("</center>");                
+                System.out.println("<center>");
+                System.out.println("<div class=\"alert alert-danger\" role=\"alert\">");
+                System.out.println("<a href=" + '"' + '#' + '"' + " class=" + '"' + "alert-link" + '"' + '>'
+                        + "Invalid Username or Password" + "</a>");
+                System.out.println("</div>");
+                System.out.println("</center>");    
+                
                 rs.include(request, response);
             }
         }
@@ -129,5 +130,6 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }
