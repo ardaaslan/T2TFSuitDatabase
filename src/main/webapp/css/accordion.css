@@ -1,0 +1,17 @@
+.strong { font-weight: bold; }
+.panel-group{
+	margin-top: -18px;
+	min-height: 10px;
+	min-width: 100px;
+	max-width: 250px;
+	max-height: 15px;
+}
+.panel-title{
+	text-align: center;
+}
+.panel-body{
+	text-align: center;
+}
+.navbar-left{
+	text-indent: 17px;
+}

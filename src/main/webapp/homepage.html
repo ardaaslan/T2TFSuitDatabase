@@ -4,9 +4,12 @@
                 <title>Welcome to T2TF</title>
                 <meta name= "viewport" content="width=device-width, initial-scale=1.0">
                 <link href = "css/bootstrap.min.css" rel = "stylesheet">
+                <link href = "css/accordion.css" rel="stylesheet">
         </head>
         <body>
- 
+                
+                <!-- Beginning of navigation bar-->
+
                 <div class = "navbar navbar-default navbar-static-top">
                         <div class = "container">
                                                   
@@ -47,9 +50,78 @@
                                
                         </div>
                 </div>
- 
+                
+                <!-- End of navigation bar-->
+
+                <!-- Beginning of accordion-->
+
+                <div class="panel-group" id="accordion">
+
+
+                        <!-- Beginning of create a project -->
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title" id="project1">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#pr1testsuites">
+                                                Project 1
+                                            </a>
+                                        </h4>
+                                </div>
+
+                                <!-- Beginning of create a test suite-->
+                                <div id="pr1testsuites" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <a href="#" style="color:gray">
+                                                Test Suite 1
+                                            </a>
+                                        </div>
+                                        <div class="panel-body">
+                                            <a href="#" style="color:gray">
+                                                Test Suite 2
+                                            </a>
+                                        </div>
+                                </div>
+                                <!-- End of create a test suite-->
+                        </div>
+                        <!-- End of create a project-->
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title" id="project2">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#pr2testsuites">
+                                                Project 2
+                                            </a>
+                                        </h4>
+                                </div>
+                                <div id="pr2testsuites" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <a href="#" style="color:gray">
+                                                Test Suite 1
+                                            </a>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title" id="project3">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#pr3testsuites">Project 3</a>
+                                        </h4>
+                                </div>
+                                <div id="pr3testsuites" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <a href="#" style="color:gray">
+                                                Test Suite 1
+                                            </a>
+                                        </div>
+                                </div>
+                         </div>
+                </div>
+
+                <!-- End of accordion-->
+
+
                 <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-                <script src = "js/bootstrap.js"></script>
-               
+                <script src = "js/bootstrap.js"></script>   
+                <script src = "js/transition.js"></script>
+                <script src = "js/collapse.js"></script>
         </body>
 </html>
