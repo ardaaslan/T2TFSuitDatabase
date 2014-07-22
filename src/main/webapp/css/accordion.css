@@ -5,6 +5,7 @@
 	min-width: 100px;
 	max-width: 250px;
 	max-height: 15px;
+        visibility: hidden;
 }
 .panel-title{
 	text-align: center;
