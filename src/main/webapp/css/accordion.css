@@ -12,7 +12,13 @@
 }
 .panel-body{
 	text-align: center;
+        max-height: 100px;
 }
 .navbar-left{
 	text-indent: 17px;
+}
+.btn-default{
+        max-height: 30px;
+        max-width: 180px;
+        line-height: 5px;
 }
