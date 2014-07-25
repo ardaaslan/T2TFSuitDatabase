@@ -128,17 +128,32 @@
         </div>
 
         <!-- End of accordion-->
+        
+        <!-- Beginning of the Project and Test Suite Grid-->
         <span class="label pull-right" style="color:black;" id="testsuitelabel">
                 Project X - Test Suite X
         </span>
         <div class="well pull-right" id="testsuitegrid">
+            <div class="well pull-right" id="testcasegrid">
+                <button type="button" class="btn btn-lg btn-default pull-right" id="addTestCaseBttn">Add a Test Case</button>
+                <br/>
+                <br/>
+                <button type="button" class="btn btn-lg btn-default pull-right" id="deleteTestCaseBttn">Delete a Test Case</button>
+                <br/>
+                <br/>
+                <button type="button" class="btn btn-lg btn-default pull-right" id="runTestCaseBttn">Run a Test Case</button>
+            </div>
+            
+            
             <div id="testsuitegridbttns">
                 <button type="button" class="btn btn-lg btn-default" id="runTestSuiteBttn">Run as Test Suite</button>
                 <button type="button" class="btn btn-lg btn-default" id="runProjectBttn">Run as Project</button>
                 <button type="button" class="btn btn-lg btn-default" id="deleteProjectBttn">Delete ProjectX</button>
             </div>
         </div>    
-      
+        
+        <!-- End of the Project and Test Suite Grid-->
+        
         <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src = "js/bootstrap.js"></script>   
         <script src = "js/transition.js"></script>
