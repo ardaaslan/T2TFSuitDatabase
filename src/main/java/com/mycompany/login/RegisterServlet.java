@@ -106,7 +106,7 @@ public class RegisterServlet extends HttpServlet {
                 } catch (ClassNotFoundException | SQLException e) {
                     
                 }
-                if(errorFlag == false){ //SEeelam
+                if(errorFlag == false){ //SEeelam yaktın beni hain :c
                     flag = 0;
                     errorFlag = false;
                     response.sendRedirect("LoginServlet");
