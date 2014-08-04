@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
 
     int flag = 0;
+    boolean errorFlag = false;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -86,8 +87,16 @@ public class RegisterServlet extends HttpServlet {
                     Class.forName("com.mysql.jdbc.Driver");
 
                     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test",
-                            "root", "");
+                            "root", "arda2112");
+                    
+                    String errorCheck = "select * from users where'" + username + "'" ;
 
+                    PreparedStatement pss = con.prepareStatement(errorCheck);
+                    
+                    ResultSet rs = pss.executeQuery();
+                    
+                    if(!rs.next())errorFlag = true;
+                    
                     String command = "insert into users values('" + username + "','" + password + "')";
 
                     PreparedStatement ps = con.prepareStatement(command);
@@ -95,11 +104,31 @@ public class RegisterServlet extends HttpServlet {
                     ps.executeUpdate();
 
                 } catch (ClassNotFoundException | SQLException e) {
-                    System.out.println(e.toString());
+                    
                 }
-                flag = 0;
+                if(errorFlag == false){ //SEeelam
+                    flag = 0;
+                    errorFlag = false;
+                    response.sendRedirect("LoginServlet");
+                }
+                else{
+                    RequestDispatcher rs = request.getRequestDispatcher("registerpage.html");
 
-                response.sendRedirect("LoginServlet");
+                    out.println("<font color=");
+                    out.println('"');
+                    out.println("red");
+                    out.println('"');
+                    out.println('>');
+
+                    out.println("<h5>");
+                    out.println("<center>");
+                    out.println("User Already Exists");
+                    out.println("</center>");
+                    out.println("</h5>");
+
+                    out.println("</font>");
+                    rs.include(request, response);
+                }
             }
         }
     }
