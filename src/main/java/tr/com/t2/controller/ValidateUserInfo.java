@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.login;
+package tr.com.t2.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +23,7 @@ public class ValidateUserInfo {
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test",
-                    "root", "arda2112");
+                    "root", "CAKIN");
 
             PreparedStatement ps = con.prepareStatement("select * from users where userName='" + name
                     + "' and password='" + pass + "'");
