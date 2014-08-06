@@ -91,9 +91,13 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
         
         Map<String,Object> parameters = new HashMap<String,Object>();
         parameters.put("userName", userName);
-        T2TFUser result = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE userName = :userName", parameters, rowMapperUser);
-        return result;
-        
+        try{
+            T2TFUser result = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE userName = :userName", parameters, rowMapperUser);
+            return result;
+        }
+        catch(Exception e){
+            return null;
+        }
     }
     
     

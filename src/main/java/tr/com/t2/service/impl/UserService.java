@@ -57,5 +57,12 @@ public class UserService implements IUserService{
             return false;
             
     }
+
+    @Override
+    public boolean ifUserExists(String username) {
+        T2TFUser user = userDAO.findByUsername(username);
+        if(user == null){return false;}
+        else{return true;}
+    }
         
 }

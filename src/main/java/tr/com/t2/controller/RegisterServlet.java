@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import tr.com.t2.domain.T2TFUser;
 import tr.com.t2.service.IUserService;
 
 /**
@@ -98,35 +99,26 @@ public class RegisterServlet extends HttpServlet {
                 out.println("</font>");
                 rs.include(request, response);
             } else {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-
-                    Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test",
-                            "root", "CAKIN");
-                    
-                    String errorCheck = "select * from users where'" + username + "'" ;
-
-                    PreparedStatement pss = con.prepareStatement(errorCheck);
-                    
-                    ResultSet rs = pss.executeQuery();
-                    
-                    if(!rs.next())errorFlag = true;
-                    
-                    String command = "insert into users values('" + username + "','" + password + "')";
-
-                    PreparedStatement ps = con.prepareStatement(command);
-
-                    ps.executeUpdate();
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    
+                
+                if(userService.ifUserExists(username)){
+                    errorFlag = true;
                 }
+                else{
+                    T2TFUser user = new T2TFUser();
+                    user.setUserName(username);
+                    user.setPassword(password);
+                    userService.createUser(user);
+                    System.out.println("User created !");
+                }
+                
+                
                 if(errorFlag == false){ //SEeelam yaktın beni hain :c
                     flag = 0;
                     errorFlag = false;
                     response.sendRedirect("LoginServlet");
                 }
                 else{
+                    errorFlag = false;
                     RequestDispatcher rs = request.getRequestDispatcher("registerpage.html");
 
                     out.println("<font color=");

@@ -27,4 +27,6 @@ public interface IUserService {
     
     boolean checkUser(String username, String password);
     
+    boolean ifUserExists(String username);
+    
 }
