@@ -5,6 +5,7 @@
         <meta name= "viewport" content="width=device-width, initial-scale=1.0">
         <link href = "css/bootstrap.min.css" rel = "stylesheet">
         <link href = "css/homepage.css" rel="stylesheet">
+  <!----------------------------------------SCRIPTS---------------------------------------------------------->   
         <script type="text/javascript">
             function makeAccordionVisible() {
                 document.getElementById("accordion").style.visibility = "visible";
@@ -12,6 +13,42 @@
                 document.getElementById("testsuitelabel").style.visibility = "visible";
             }
         </script>
+
+    
+     <script>
+            function addProjectToAccordion(projectName) {
+                
+                var buttonHTML = 'data-toggle="collapse" data-parent="#accordion" href="#pr1testsuites">';
+                var btn=document.createElement("BUTTON");   
+                btn.className = "btn dropdown-toggle";
+               
+                
+              
+                btn.innerHTML=projectName;
+                
+                var t=document.createTextNode(projectName);
+                btn.appendChild(t);
+                var element = document.getElementById("accordion");
+                element.appendChild(btn);
+            }
+        </script>
+        
+        
+        
+        <script>
+            function createProjectPrompt() {
+                var project = prompt("Please enter your project name");
+
+                if (project != null) {
+                    document.getElementById("createProject").innerHTML =
+                            document.getElementById("createProject").innerHTML;
+                   addProjectToAccordion(project);
+                }
+            }
+        </script>
+
+        
+<!--------------------------------------------------------------------------------------------------------------------------->
     </head>
     <body>
 
@@ -118,20 +155,21 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#" style="color:gray; text-align:center; margin: 0 auto;">
-                        Create Project
-                    </a>
-                </div>
-            </div>
+            
+            
+            <form method = "post" class="form-signin" id="createProject" onClick="createProjectPrompt()" role="form">
+                <input type="submit" style="background-color:gray" class="btn btn-lg btn-primary btn-block" value="Create Project">  
+
+
+
+            </form>
         </div>
 
         <!-- End of accordion-->
-        
+
         <!-- Beginning of the Project and Test Suite Grid-->
         <span class="label pull-right" style="color:black;" id="testsuitelabel">
-                Project X - Test Suite X
+            Project X - Test Suite X
         </span>
         <div class="well pull-right" id="testsuitegrid">
             <div class="well pull-right" id="testcasegrid">
@@ -143,17 +181,17 @@
                 <br/>
                 <button type="button" class="btn btn-lg btn-default pull-right" id="runTestCaseBttn">Run a Test Case</button>
             </div>
-            
-            
+
+
             <div id="testsuitegridbttns">
                 <button type="button" class="btn btn-lg btn-default" id="runTestSuiteBttn">Run as Test Suite</button>
                 <button type="button" class="btn btn-lg btn-default" id="runProjectBttn">Run as Project</button>
                 <button type="button" class="btn btn-lg btn-default" id="deleteProjectBttn">Delete ProjectX</button>
             </div>
         </div>    
-        
+
         <!-- End of the Project and Test Suite Grid-->
-        
+
         <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src = "js/bootstrap.js"></script>   
         <script src = "js/transition.js"></script>
