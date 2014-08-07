@@ -17,13 +17,27 @@
     
      <script>
             function addProjectToAccordion(projectName) {
-                var project = document.getElementById("project1");
-               
-                project.textContent = projectName;
-               
-                
-                 
-      
+        var strVar="";
+strVar += " <div class=\"panel panel-default\">";
+strVar += "                <div class=\"panel-heading\">";
+strVar += "                    <h4 class=\"panel-title\" id=\"projectx\">";
+strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#prxtestsuites\">";
+strVar += "                            " + projectName;
+strVar += "                        <\/a>";
+strVar += "                    <\/h4>";
+strVar += "                <\/div>";
+strVar += "";
+strVar += "                <!-- Beginning of create a test suite-->";
+strVar += "                <div id=\"prxtestsuites\" class=\"panel-collapse collapse\">";
+strVar += "                    <div class=\"panel-body\">";
+strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+strVar += "                    <\/div>";
+strVar += "                <\/div>";
+strVar += "                <!-- End of create a test suite-->";
+strVar += "            <\/div>";        
+        
+        var project = document.getElementById("project1");
+                $(".panel-group").append(strVar);
             }
         </script>
         
@@ -85,7 +99,7 @@
 
 
             <!-- Beginning of create a project -->
-            <div class="panel panel-default"">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" id="project1">
                         <a data-toggle="collapse" data-parent="#accordion" href="#pr1testsuites">
