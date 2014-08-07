@@ -20,15 +20,15 @@
         var strVar="";
 strVar += " <div class=\"panel panel-default\">";
 strVar += "                <div class=\"panel-heading\">";
-strVar += "                    <h4 class=\"panel-title\" id=\"projectx\">";
-strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#prxtestsuites\">";
+strVar += "                    <h4 class=\"panel-title\" id=\""+projectName+"\">";
+strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+projectName+"suites\">";
 strVar += "                            " + projectName;
 strVar += "                        <\/a>";
 strVar += "                    <\/h4>";
 strVar += "                <\/div>";
 strVar += "";
 strVar += "                <!-- Beginning of create a test suite-->";
-strVar += "                <div id=\"prxtestsuites\" class=\"panel-collapse collapse\">";
+strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
 strVar += "                    <div class=\"panel-body\">";
 strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
 strVar += "                    <\/div>";
@@ -99,17 +99,17 @@ strVar += "            <\/div>";
 
 
             <!-- Beginning of create a project -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
+          <!--  <div class="panel panel-default">
+               <!-- <div class="panel-heading">
                     <h4 class="panel-title" id="project1">
                         <a data-toggle="collapse" data-parent="#accordion" href="#pr1testsuites">
                             Project 1
                         </a>
                     </h4>
-                </div>
+                </div>-->
 
                 <!-- Beginning of create a test suite-->
-                <div id="pr1testsuites" class="panel-collapse collapse">
+                <!--<div id="pr1testsuites" class="panel-collapse collapse">
                     <div class="panel-body">
                         <a href="#" style="color:gray">
                             Test Suite 1
@@ -123,11 +123,11 @@ strVar += "            <\/div>";
                     <div class="panel-body">
                         <button type="button" class="btn pull-right btn-lg btn-default">Create Test Suite</button>
                     </div>
-                </div>
+                </div>-->
                 <!-- End of create a test suite-->
-            </div>
+            <!--</div>
             <!-- End of create a project-->
-            <div class="panel panel-default">
+           <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" id="project2">
                         <a data-toggle="collapse" data-parent="#accordion" href="#pr2testsuites">
@@ -145,8 +145,8 @@ strVar += "            <\/div>";
                         <button type="button" class="btn pull-right btn-lg btn-default">Create Test Suite</button>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
+            </div>-->
+            <!--<div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" id="project3">
                         <a data-toggle="collapse" data-parent="#accordion" href="#pr3testsuites">Project 3</a>
@@ -162,7 +162,7 @@ strVar += "            <\/div>";
                         <button type="button" class="btn pull-right btn-lg btn-default">Create Test Suite</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
             
             <form method = "post" class="form-signin" id="createProject" onClick="createProjectPrompt()" role="form">
