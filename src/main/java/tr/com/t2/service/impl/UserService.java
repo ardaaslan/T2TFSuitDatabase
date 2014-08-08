@@ -8,8 +8,10 @@ package tr.com.t2.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 import tr.com.t2.dao.T2TFUserDAO;
+import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.domain.T2TFUser;
 import tr.com.t2.service.IUserService;
 
@@ -63,6 +65,11 @@ public class UserService implements IUserService{
         T2TFUser user = userDAO.findByUsername(username);
         if(user == null){return false;}
         else{return true;}
+    }
+
+    @Override
+    public void createProject(T2TFProject project) {
+       userDAO.createProject(project);
     }
         
 }

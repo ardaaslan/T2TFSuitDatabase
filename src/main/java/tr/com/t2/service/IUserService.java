@@ -7,6 +7,7 @@
 package tr.com.t2.service;
 
 import java.util.List;
+import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.domain.T2TFUser;
 
 /**
@@ -28,5 +29,7 @@ public interface IUserService {
     boolean checkUser(String username, String password);
     
     boolean ifUserExists(String username);
+    
+    void createProject(T2TFProject project);
     
 }

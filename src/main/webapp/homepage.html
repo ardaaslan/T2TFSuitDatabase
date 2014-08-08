@@ -26,7 +26,6 @@ strVar += "                            " + projectName;
 strVar += "                        <\/a>";
 strVar += "                    <\/h4>";
 strVar += "                <\/div>";
-strVar += "";
 strVar += "                <!-- Beginning of create a test suite-->";
 strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
 strVar += "                    <div class=\"panel-body\">";
@@ -38,7 +37,15 @@ strVar += "            <\/div>";
         
         var project = document.getElementById("project1");
                 $(".panel-group").append(strVar);
-            }
+              /* theApplet = document.getElementById("app");
+                theApplet2 = document.getElementById("app2");
+                theApplet.setUserName("arda");
+                theApplet.setProjectName(projectName);
+                theApplet2.createProject(theApplet);*/
+  
+   
+                
+    }
         </script>
         
         
@@ -59,7 +66,14 @@ strVar += "            <\/div>";
 <!--------------------------------------------------------------------------------------------------------------------------->
     </head>
     <body>
-
+        <!--<applet id="app"
+        code="T2TFProject.class" 
+                >
+        </applet>
+        <applet id="app2"
+        code="UserService.class" 
+                >
+        </applet>
         <!-- Beginning of navigation bar-->
 
         <div class = "navbar navbar-default navbar-static-top">

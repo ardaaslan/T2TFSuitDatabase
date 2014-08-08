@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import tr.com.t2.dao.T2TFUserDAO;
+import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.domain.T2TFUser;
 
 /**
@@ -29,13 +30,27 @@ import tr.com.t2.domain.T2TFUser;
 public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
 
     private SimpleJdbcInsert insertUser;
+    private SimpleJdbcInsert insertProject;
     
     @PostConstruct
     public void aftePropertiesSet(){
     
         this.insertUser = new SimpleJdbcInsert(jdbcTemplate).withTableName("users");
+         this.insertProject = new SimpleJdbcInsert(jdbcTemplate).withTableName("projects");
         
     }
+
+    private final RowMapper<T2TFProject> rowMapperProject = new RowMapper<T2TFProject>(){
+
+        @Override
+        public T2TFProject mapRow(ResultSet rs, int i) throws SQLException {
+            T2TFProject project = new T2TFProject();
+            project.setUserName(rs.getString("userName"));
+            project.setProjectName(rs.getString("projectName"));
+            return project;
+        }        
+            
+    };
     
     private final RowMapper<T2TFUser> rowMapperUser = new RowMapper<T2TFUser>(){
 
@@ -98,6 +113,15 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
         catch(Exception e){
             return null;
         }
+    }
+
+    @Override
+    public void createProject(T2TFProject project) {
+                MapSqlParameterSource projectParameters = new MapSqlParameterSource();
+               projectParameters.addValue("userName", project.getUserName());
+               projectParameters.addValue("projectName",project.getProjectName());
+               this.insertProject.execute(projectParameters);
+        
     }
     
     

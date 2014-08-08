@@ -7,6 +7,7 @@
 package tr.com.t2.dao;
 
 import java.util.List;
+import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.domain.T2TFUser;
 
 /**
@@ -23,5 +24,7 @@ public interface T2TFUserDAO {
     void deleteUser(T2TFUser user);
     
     T2TFUser findByUsername(String userName);
+    
+    void createProject(T2TFProject project);
    
 }
