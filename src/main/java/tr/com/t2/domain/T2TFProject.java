@@ -6,14 +6,19 @@
 
 package tr.com.t2.domain;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+
 /**
  *
  * @author Arda
  */
+@JsonAutoDetect
 public class T2TFProject {
+    private String userName;
+    private String projectName;
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
@@ -21,13 +26,12 @@ public class T2TFProject {
     }
 
     public String getProjectName() {
-        return projectName;
+        return this.projectName;
     }
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
     
-    private String userName;
-    private String projectName;
+
 }

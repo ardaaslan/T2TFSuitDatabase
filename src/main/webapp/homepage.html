@@ -17,42 +17,43 @@
     
      <script>
             function addProjectToAccordion(projectName) {
-        var strVar="";
-strVar += " <div class=\"panel panel-default\">";
-strVar += "                <div class=\"panel-heading\">";
-strVar += "                    <h4 class=\"panel-title\" id=\""+projectName+"\">";
-strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+projectName+"suites\">";
-strVar += "                            " + projectName;
-strVar += "                        <\/a>";
-strVar += "                    <\/h4>";
-strVar += "                <\/div>";
-strVar += "                <!-- Beginning of create a test suite-->";
-strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
-strVar += "                    <div class=\"panel-body\">";
-strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
-strVar += "                    <\/div>";
-strVar += "                <\/div>";
-strVar += "                <!-- End of create a test suite-->";
-strVar += "            <\/div>";        
-        
-        var project = document.getElementById("project1");
-                $(".panel-group").append(strVar);
-        var dataObj = {project : projectName};
-        $.ajax({
-            url : 'javaClasses.jsp',
-            dataType : 'text',
-            data : dataObj ,
-            cache : false ,
-            success : alert("Basarili !!!")});
-              /* theApplet = document.getElementById("app");
-                theApplet2 = document.getElementById("app2");
-                theApplet.setUserName("arda");
-                theApplet.setProjectName(projectName);
-                theApplet2.createProject(theApplet);*/
-  
-   
-                
-    }
+                var strVar="";
+                strVar += " <div class=\"panel panel-default\">";
+                strVar += "                <div class=\"panel-heading\">";
+                strVar += "                    <h4 class=\"panel-title\" id=\""+projectName+"\">";
+                strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+projectName+"suites\">";
+                strVar += "                            " + projectName;
+                strVar += "                        <\/a>";
+                strVar += "                    <\/h4>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- Beginning of create a test suite-->";
+                strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
+                strVar += "                    <div class=\"panel-body\">";
+                strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+                strVar += "                    <\/div>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- End of create a test suite-->";
+                strVar += "            <\/div>";        
+
+            var project = document.getElementById("project1");
+                    $(".panel-group").append(strVar);
+
+            $.ajax({ 
+                url : "CreateProject",
+                data: {
+                    projectInfo : JSON.stringify({ 
+                        projectName: projectName ,
+                        userName   :'ali'
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log(data);
+                }     
+            }); 
+         }
         </script>
         
         

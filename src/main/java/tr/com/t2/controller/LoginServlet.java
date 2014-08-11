@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import tr.com.t2.controller.ValidateUserInfo;
+import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.service.IUserService;
 
 /**
@@ -65,7 +66,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        
+     
         RequestDispatcher rs = request.getRequestDispatcher("index.html");
         rs.forward(request, response);
         
@@ -84,7 +85,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -150,6 +150,16 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+   
+    public void test(String projectID)
+    {
+   
+        T2TFProject a = new T2TFProject();
+        a.setProjectName(projectID);
+        a.setUserName("zarda");
+        userService.createProject(a);
+      
+    }
 
 }
