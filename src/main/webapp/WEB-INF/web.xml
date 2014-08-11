@@ -39,6 +39,7 @@
         <servlet-name>mainPageServlet</servlet-name>
         <url-pattern>/MainPageServlet</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

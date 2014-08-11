@@ -135,6 +135,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.directwebremoting</groupId>
+            <artifactId>dwr</artifactId>
+            <version>3.0.M1</version>
+            <classifier>jdk14</classifier>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

@@ -37,6 +37,13 @@ strVar += "            <\/div>";
         
         var project = document.getElementById("project1");
                 $(".panel-group").append(strVar);
+        var dataObj = {project : projectName};
+        $.ajax({
+            url : 'javaClasses.jsp',
+            dataType : 'text',
+            data : dataObj ,
+            cache : false ,
+            success : alert("Basarili !!!")});
               /* theApplet = document.getElementById("app");
                 theApplet2 = document.getElementById("app2");
                 theApplet.setUserName("arda");
