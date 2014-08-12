@@ -20,6 +20,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import tr.com.t2.dao.T2TFUserDAO;
 import tr.com.t2.domain.T2TFProject;
+import tr.com.t2.domain.T2TFTestSuite;
 import tr.com.t2.domain.T2TFUser;
 
 /**
@@ -31,15 +32,29 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
 
     private SimpleJdbcInsert insertUser;
     private SimpleJdbcInsert insertProject;
+    private SimpleJdbcInsert insertTestSuite;
     
     @PostConstruct
     public void aftePropertiesSet(){
     
         this.insertUser = new SimpleJdbcInsert(jdbcTemplate).withTableName("users");
          this.insertProject = new SimpleJdbcInsert(jdbcTemplate).withTableName("projects");
+         this.insertTestSuite = new SimpleJdbcInsert(jdbcTemplate).withTableName("testsuites");
         
     }
+    private final RowMapper<T2TFTestSuite> rowMapperTestSuite = new RowMapper<T2TFTestSuite>(){
 
+        @Override
+        public T2TFTestSuite mapRow(ResultSet rs, int i) throws SQLException {
+            T2TFTestSuite testSuite = new T2TFTestSuite();
+            testSuite.setUserName(rs.getString("userName"));
+            testSuite.setProjectName(rs.getString("projectName"));
+            testSuite.setTestSuiteName(rs.getString("testSuiteName"));
+            return testSuite;
+        }        
+            
+    };
+    
     private final RowMapper<T2TFProject> rowMapperProject = new RowMapper<T2TFProject>(){
 
         @Override
@@ -125,6 +140,13 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
         
     }
     
-    
+    @Override
+    public void createTestSuite(T2TFTestSuite testSuite){
+            MapSqlParameterSource projectParameters = new MapSqlParameterSource();
+               projectParameters.addValue("userName", testSuite.getUserName());
+               projectParameters.addValue("projectName",testSuite.getProjectName());
+               projectParameters.addValue("testSuiteName",testSuite.getTestSuiteName());
+               this.insertProject.execute(projectParameters);
+    }
     
 }

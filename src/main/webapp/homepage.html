@@ -77,7 +77,25 @@ strVar += "                    <\/div>";
                 
 $(projectName).prepend(strVar);
      
-        
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+
+            $.ajax({ 
+                url : "CreateTestSuite",
+                data: {
+                    projectInfo : JSON.stringify({ 
+                        projectName: projectName ,
+                        userName   :userName     ,
+                        testSuiteName : testSuite
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            }); 
         
         
         

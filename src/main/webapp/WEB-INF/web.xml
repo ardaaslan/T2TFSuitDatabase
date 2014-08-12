@@ -31,6 +31,10 @@
         <servlet-name>createProject</servlet-name>
         <servlet-class>tr.com.t2.controller.CreateProjectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createTestSuite</servlet-name>
+        <servlet-class>tr.com.t2.controller.CreateTestSuiteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -38,6 +42,10 @@
     <servlet-mapping>
         <servlet-name>createProject</servlet-name>
         <url-pattern>/CreateProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createTestSuite</servlet-name>
+        <url-pattern>/CreateTestSuite</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>
