@@ -69,7 +69,7 @@ public class CreateProjectServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         T2TFProject newProject = mapper.readValue(projectInfo, T2TFProject.class);
         userService.createProject(newProject);
-        out.print("success");
+  
     }
 
     /**

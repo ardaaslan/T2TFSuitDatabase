@@ -125,7 +125,7 @@ public class LoginServlet extends HttpServlet {
         else
         {
             if (userService.checkUser(username, password)) {
-                response.sendRedirect("MainPageServlet");
+                response.sendRedirect("MainPageServlet?username="+username);
             } else {
                 RequestDispatcher rs = request.getRequestDispatcher("index.html");
 

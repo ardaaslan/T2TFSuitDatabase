@@ -27,23 +27,26 @@
                 strVar += "                    <\/h4>";
                 strVar += "                <\/div>";
                 strVar += "                <!-- Beginning of create a test suite-->";
-                strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
+                strVar += "                <div id=\""+projectName+"suites\""+ "onClick=\"createTestSuitePrompt()\""+"class=\"panel-collapse collapse\">";
                 strVar += "                    <div class=\"panel-body\">";
                 strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
                 strVar += "                    <\/div>";
                 strVar += "                <\/div>";
                 strVar += "                <!-- End of create a test suite-->";
                 strVar += "            <\/div>";        
-
-            var project = document.getElementById("project1");
-                    $(".panel-group").append(strVar);
+                  $('#accordion').append(strVar).accordion('destroy').accordion();
+                   //var project = document.getElementById("project1");
+                   // $(".panel-group").append(strVar);
+                    
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
 
             $.ajax({ 
                 url : "CreateProject",
                 data: {
                     projectInfo : JSON.stringify({ 
                         projectName: projectName ,
-                        userName   :'ali'
+                        userName   :userName
                     })
                 },
                 dataType: 'json',
@@ -54,6 +57,32 @@
                 }     
             }); 
          }
+        </script>
+        
+        <script>
+                function createTestSuitePrompt() {
+         var testSuite = prompt("Please enter your test suite name");
+         if (testSuite != null) {
+         var strVar="";
+strVar += " <div id=\""+testSuite+"\" class=\"panel-collapse collapse\">";
+strVar += "                    <div class=\"panel-body\">";
+strVar += "                        <a href=\"#\" style=\"color:gray\">";
+strVar += "                            Test Suite 1";
+strVar += "                        <\/a>";
+strVar += "                    <\/div>";
+strVar += "                    <div class=\"panel-body\">";
+strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+strVar += "                    <\/div>";
+strVar += "                <\/div>";
+                
+       $('#kkksuites').append(strVar).accordion('destroy').accordion();     
+        
+        
+        
+        
+        
+        }
+            }
         </script>
         
         
@@ -69,6 +98,8 @@
                 }
             }
         </script>
+        
+            
 
         
 <!--------------------------------------------------------------------------------------------------------------------------->
