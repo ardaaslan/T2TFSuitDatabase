@@ -17,7 +17,8 @@
     
      <script>
             function addProjectToAccordion(projectName) {
-                var strVar="";
+            var argumentToPass = projectName + "suites";   
+            var strVar="";
                 strVar += " <div class=\"panel panel-default\">";
                 strVar += "                <div class=\"panel-heading\">";
                 strVar += "                    <h4 class=\"panel-title\" id=\""+projectName+"\">";
@@ -29,7 +30,7 @@
                 strVar += "                <!-- Beginning of create a test suite-->";
                 strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
                 strVar += "                    <div class=\"panel-body\">";
-                strVar += "                        <button type=\"button\""+ "onClick=\"createTestSuitePrompt("+projectName+"suites"+")\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+                strVar += "                        <button type=\"button\""+ "onClick=\"createTestSuitePrompt("+argumentToPass+")\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
                 strVar += "                    <\/div>";
                 strVar += "                <\/div>";
                 strVar += "                <!-- End of create a test suite-->";
@@ -62,6 +63,9 @@
         <script>
                 function createTestSuitePrompt(projectName) {
          var testSuite = prompt("Please enter your test suite name");
+         var realProjectName = $(projectName).attr('id');
+         var ajaxProjectName = realProjectName.substring(0,((realProjectName.length)-6));
+        
          if (testSuite != null) {
          var strVar="";
 //strVar += " <div id=\""+testSuite+"\" class=\"panel-collapse collapse\">";
@@ -76,15 +80,16 @@ strVar += "                    <\/div>";
 //strVar += "                <\/div>";
                 
 $(projectName).prepend(strVar);
-     
+   
             var allURL = window.location.toString();
             var userName = allURL.substring(allURL.indexOf("=")+1);
+ 
 
             $.ajax({ 
                 url : "CreateTestSuite",
                 data: {
                     projectInfo : JSON.stringify({ 
-                        projectName: projectName ,
+                        projectName: ajaxProjectName ,
                         userName   :userName     ,
                         testSuiteName : testSuite
                     })
@@ -97,7 +102,8 @@ $(projectName).prepend(strVar);
                 }     
             }); 
         
-        
+  
+      
         
         }
             }

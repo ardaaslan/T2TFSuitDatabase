@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import tr.com.t2.domain.T2TFProject;
 import tr.com.t2.domain.T2TFTestSuite;
 import tr.com.t2.service.IUserService;
 

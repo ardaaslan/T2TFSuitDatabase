@@ -146,7 +146,7 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                projectParameters.addValue("userName", testSuite.getUserName());
                projectParameters.addValue("projectName",testSuite.getProjectName());
                projectParameters.addValue("testSuiteName",testSuite.getTestSuiteName());
-               this.insertProject.execute(projectParameters);
+               this.insertTestSuite.execute(projectParameters);
     }
     
 }
