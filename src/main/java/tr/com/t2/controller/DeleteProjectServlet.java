@@ -68,7 +68,6 @@ public class DeleteProjectServlet extends HttpServlet {
         String projectInfo = request.getParameter("projectInfo");
         ObjectMapper mapper = new ObjectMapper();
         T2TFProject newProject = mapper.readValue(projectInfo, T2TFProject.class);
-        System.out.println(newProject.getProjectName());
         userService.deleteProject(newProject);
   
     }
