@@ -29,5 +29,7 @@ public interface T2TFUserDAO {
     void createProject(T2TFProject project);
     
     void createTestSuite(T2TFTestSuite testSuite);
+    
+    void deleteProject(T2TFProject project);
    
 }

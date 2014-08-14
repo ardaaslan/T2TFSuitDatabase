@@ -148,5 +148,13 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                projectParameters.addValue("testSuiteName",testSuite.getTestSuiteName());
                this.insertTestSuite.execute(projectParameters);
     }
+
+    @Override
+    public void deleteProject(T2TFProject project) {
+               jdbcTemplate.update("DELETE FROM projects "
+                + "where userName = ? AND "
+                + "projectName = ?"
+                ,new Object[]{project.getUserName(),project.getProjectName()},new int[]{Types.VARCHAR,Types.VARCHAR});
+    }
     
 }

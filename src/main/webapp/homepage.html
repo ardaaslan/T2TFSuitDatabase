@@ -141,7 +141,6 @@
 
         <!-- Beginning of the Project and Test Suite Grid-->
         <span class="label pull-right" style="color:black;" id="testsuitelabel">
-            Project X - Test Suite X
         </span>
         <div class="well pull-right" id="testsuitegrid">
             <div class="well pull-right" id="testcasegrid">
@@ -176,8 +175,8 @@
             function addProjectToAccordion(projectName) {
             var argumentToPass = projectName + "suites";   
             var strVar="";
-                strVar += " <div class=\"panel panel-default\">";
-                strVar += "                <div class=\"panel-heading\">";
+                strVar += " <div class=\"panel panel-default\" id=\""+projectName+"default\">";
+                strVar += "                <div class=\"panel-heading\" id=\""+projectName+"heading\">";
                 strVar += "                    <h4 class=\"panel-title\""+"onClick=\"showProject("+projectName+")\"" +" id=\""+projectName+"\">";
                 strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+projectName+"suites\">";
                 strVar += "                            " + projectName;
@@ -220,13 +219,16 @@
         <script>
                 function createTestSuitePrompt(projectName) {
          var testSuite = prompt("Please enter your test suite name");
+         var argumentToPass = testSuite + "tests";
+         //var realTestSuiteName = $(testSuite).attr('id');
+         //var ajaxTestSuiteName = realTestSuiteName.substring(0,((realTestSuiteName.length)-5));
          var realProjectName = $(projectName).attr('id');
          var ajaxProjectName = realProjectName.substring(0,((realProjectName.length)-6));
         
          if (testSuite != null) {
          var strVar="";
 //strVar += " <div id=\""+testSuite+"\" class=\"panel-collapse collapse\">";
-strVar += "                    <div id=\""+testSuite+"tests"+"\""+"onClick=\"showTestSuite("+testSuite+")\"" +" class=\"panel-body\">";
+strVar += "                    <div id=\""+testSuite+"tests"+"\""+"onClick=\"showTestSuite("+argumentToPass+")\"" +" class=\"panel-body\">";
 strVar += "                        <a href=\"#\" style=\"color:gray\">";
 strVar += "                            " + testSuite;
 strVar += "                        <\/a>";
@@ -281,10 +283,16 @@ $(projectName).prepend(strVar);
         </script>
         
           <script>
-            function showTestSuite(testSuite) {
-        console.log(testSuite);  
+            function showTestSuite(argTestSuiteName) {
+               
+          var realTestSuiteName = $(argTestSuiteName).attr('id');
+        var ajaxTestSuiteName = realTestSuiteName.substring(0,((realTestSuiteName.length)-5));  
         var strVar="";
-strVar += " <div class=\"well pull-right\" id=\"testcasegrid\">";
+strVar += "        <span class=\"label pull-right\" style=\"color:black;\" id=\"testsuitelabel\">";
+
+strVar += "        <\/span>";
+strVar += "        <div class=\"well pull-right\" id=\"testsuitegrid\">";
+strVar += "            <div class=\"well pull-right\" id=\"testcasegrid\">";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" id=\"addTestCaseBttn\">Add a Test Case<\/button>";
 strVar += "                <br\/>";
 strVar += "                <br\/>";
@@ -293,17 +301,28 @@ strVar += "                <br\/>";
 strVar += "                <br\/>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" id=\"runTestCaseBttn\">Run a Test Case<\/button>";
 strVar += "            <\/div>";
+strVar += "";
+strVar += "";
+strVar += "            <div id=\"testsuitegridbttns\">";
+strVar += "         <div style=\"position: absolute; top:80px; left:275px; width:200px; height:10px\">"+ajaxTestSuiteName+"<\/div> ";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"deleteProjectBttn\">Delete ProjectX<\/button>";
+strVar += "            <\/div>";
+strVar += "        <\/div>  ";
 
        
-                //document.getElementById("testsuitegrid").style.visibility = "visible";
+                document.getElementById("testsuitegrid").innerHTML = strVar;
             //  $("#testsuitegrid").add(strVar);
-             // document.getElementById("testsuitelabel").style.visibility = "visible";
+              document.getElementById("testsuitelabel").style.visibility = "visible";
+              document.getElementById("testcasegrid").style.visibility = "visible";
+               document.getElementById("testsuitegridbttns").style.visibility = "visible";
             }
         </script>
         
         <script>
-            function showProject(projectName) {
-          var realProjectName = $(projectName).attr('id');        
+            function showProject(projectName) {  
+        var realProjectName = $(projectName).attr('id');        
         var strVar="";
 strVar += "<span class=\"label pull-right\" style=\"color:black;\" id=\"testsuitelabel\">";
 strVar += "        <\/span>";
@@ -312,7 +331,7 @@ strVar += "<div style=\"position: absolute; top:80px; left:275px; width:200px; h
 
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
-strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"deleteProjectBttn\">Delete Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"deleteProject("+realProjectName+")\"" +" id=\"deleteProjectBttn\">Delete Project<\/button>";
 strVar += "            <\/div>";
 strVar += "        <\/div>    ";
                 //document.getElementById("accordion").style.visibility = "visible";
@@ -321,6 +340,32 @@ strVar += "        <\/div>    ";
                 document.getElementById("testsuitegrid").style.visibility = "visible";
                 document.getElementById("testsuitegrid").innerHTML = strVar;
                // document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+                <script>
+            function deleteProject(projectName) {  
+            var realProjectName = $(projectName).attr('id');        
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);    
+              $("#"+realProjectName+"default").remove();
+              $("#"+realProjectName+"suites").remove();
+              $("#"+realProjectName+"heading").remove();
+        $.ajax({ 
+                url : "DeleteProject",
+                data: {
+                    projectInfo : JSON.stringify({ 
+                        projectName: realProjectName ,
+                        userName   :userName        
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            }); 
             }
         </script>
         

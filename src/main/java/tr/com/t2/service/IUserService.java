@@ -34,4 +34,6 @@ public interface IUserService {
     void createProject(T2TFProject project);
     
     void createTestSuite(T2TFTestSuite testSuite);
+    
+    void deleteProject(T2TFProject project);
 }

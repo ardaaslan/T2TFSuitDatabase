@@ -77,5 +77,10 @@ public class UserService implements IUserService{
     public void createTestSuite(T2TFTestSuite testSuite) {
       userDAO.createTestSuite(testSuite);
     }
+
+    @Override
+    public void deleteProject(T2TFProject project) {
+        userDAO.deleteProject(project);
+    }
         
 }
