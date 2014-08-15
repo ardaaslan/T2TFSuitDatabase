@@ -157,7 +157,9 @@
             <div id="testsuitegridbttns">
                 <button type="button" class="btn btn-lg btn-default" id="runTestSuiteBttn">Run as Test Suite</button>
                 <button type="button" class="btn btn-lg btn-default" id="runProjectBttn">Run as Project</button>
+                <button type="button" class="btn btn-lg btn-default" id="updateProjectBttn">Update Project</button>
                 <button type="button" class="btn btn-lg btn-default" id="deleteProjectBttn">Delete ProjectX</button>
+                
             </div>
         </div>    
 
@@ -307,6 +309,7 @@ strVar += "            <div id=\"testsuitegridbttns\">";
 strVar += "         <div style=\"position: absolute; top:80px; left:275px; width:200px; height:10px\">"+ajaxTestSuiteName+"<\/div> ";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
+strVar += "               <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"updateProjectBttn\">Update Project<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"deleteProjectBttn\">Delete ProjectX<\/button>";
 strVar += "            <\/div>";
 strVar += "        <\/div>  ";
@@ -331,6 +334,7 @@ strVar += "<div style=\"position: absolute; top:80px; left:275px; width:200px; h
 
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"updateProject("+realProjectName+")\"" +"id=\"updateProjectBttn\">Update Project<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"deleteProject("+realProjectName+")\"" +" id=\"deleteProjectBttn\">Delete Project<\/button>";
 strVar += "            <\/div>";
 strVar += "        <\/div>    ";
@@ -365,7 +369,64 @@ strVar += "        <\/div>    ";
                 success : function(data){
                     console.log("success ?");
                 }     
+            });
+                document.getElementById("testsuitegrid").innerHTML = "";
+                document.getElementById("testsuitelabel").innerHTML = "";
+                 document.getElementById("testsuitegrid").style.visibility = "hidden";
+                 document.getElementById(projectName+"default").style.visibility = "hidden";
+            
+            }
+        </script>
+        
+         <script>
+            function updateProject(projectName) {  
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+            var newProject = prompt("Please enter your new project name");
+            var realProjectName = $(projectName).attr('id');
+          
+            var argumentToPass = newProject + "suites";   
+            var strVar="";
+                strVar += " <div class=\"panel panel-default\" id=\""+newProject+"default\">";
+                strVar += "                <div class=\"panel-heading\" id=\""+newProject+"heading\">";
+                strVar += "                    <h4 class=\"panel-title\""+"onClick=\"showProject("+newProject+")\"" +" id=\""+newProject+"\">";
+                strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+newProject+"suites\">";
+                strVar += "                            " + newProject;
+                strVar += "                        <\/a>";
+                strVar += "                    <\/h4>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- Beginning of create a test suite-->";
+                strVar += "                <div id=\""+newProject+"suites\" class=\"panel-collapse collapse\">";
+                strVar += "                    <div class=\"panel-body\">";
+                strVar += "                        <button type=\"button\""+ "onClick=\"createTestSuitePrompt("+argumentToPass+")\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+                strVar += "                    <\/div>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- End of create a test suite-->";
+                strVar += "            <\/div>";        
+                
+                var oldId = document.getElementById(realProjectName +"default");
+                oldId.innerHTML = strVar;
+                oldId.id = newProject + "default";
+             $.ajax({ 
+                url : "UpdateProject",
+                data: {
+                    oldProjectInfo : JSON.stringify({ 
+                        projectName: realProjectName ,
+                        userName   :userName        
+                    }),
+                    newProjectInfo : JSON.stringify({ 
+                        projectName: newProject ,
+                        userName   :userName        
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
             }); 
+               
             }
         </script>
         

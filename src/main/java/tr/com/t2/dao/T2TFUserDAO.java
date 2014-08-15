@@ -18,6 +18,8 @@ import tr.com.t2.domain.T2TFUser;
 public interface T2TFUserDAO {
     List<T2TFUser> listAllUsers();
     
+    List<T2TFProject> listAllProjects();
+    
     void createUser(T2TFUser user);
     
     void updateUser(T2TFUser user);
@@ -31,5 +33,7 @@ public interface T2TFUserDAO {
     void createTestSuite(T2TFTestSuite testSuite);
     
     void deleteProject(T2TFProject project);
+    
+    void updateProject(T2TFProject oldProject, T2TFProject newProject);
    
 }

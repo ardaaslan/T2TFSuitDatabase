@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -155,6 +156,25 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                 + "where userName = ? AND "
                 + "projectName = ?"
                 ,new Object[]{project.getUserName(),project.getProjectName()},new int[]{Types.VARCHAR,Types.VARCHAR});
+    }
+
+
+    @Override
+    public void updateProject(T2TFProject oldProject, T2TFProject newProject) {
+        jdbcTemplate.update("UPDATE projects SET "+
+                "userName = ?,"+
+                "projectName = ? "+
+                "where userName = ? "+
+                "AND projectName = ?"
+                ,new Object[]{newProject.getUserName(),newProject.getProjectName(),oldProject.getUserName(),oldProject.getProjectName()}
+                ,new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
+    }
+
+    @Override
+    public List<T2TFProject> listAllProjects() {
+        Map<String,Object> parameters = new HashMap<String,Object>();
+        List<T2TFProject> result = namedParameterJdbcTemplate.query("SELECT * FROM projects", parameters, rowMapperProject);
+        return result;
     }
     
 }

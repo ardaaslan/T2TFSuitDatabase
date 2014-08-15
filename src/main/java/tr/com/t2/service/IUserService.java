@@ -19,6 +19,8 @@ public interface IUserService {
     
     List<T2TFUser> listAllUsers();
     
+    List<T2TFProject> listAllProjects();
+    
     void createUser(T2TFUser user);
     
     void updateUser(T2TFUser user);
@@ -36,4 +38,7 @@ public interface IUserService {
     void createTestSuite(T2TFTestSuite testSuite);
     
     void deleteProject(T2TFProject project);
+    
+    void updateProject(T2TFProject oldProject, T2TFProject newProject);
+    
 }

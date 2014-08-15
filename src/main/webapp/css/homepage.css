@@ -70,18 +70,25 @@
     position:relative;
     width: 600px;
     margin-bottom: -250px;
-    margin-right: 300px;
+    margin-right: 150px;
     margin-left: 130px;
 }
 #runProjectBttn{
     position:relative;
     margin-bottom: -250px;
     width: 600px;
-    margin-right: 50px;
+    margin-right: 100px;
 }
 #deleteProjectBttn{
     margin-bottom: -250px;
-    margin-left: 210px;
+    margin-left: 150px;
+    position:relative;
+    width: 600px;
+}
+
+#updateProjectBttn{
+    margin-bottom: -250px;
+    margin-left: 50px;
     position:relative;
     width: 600px;
 }

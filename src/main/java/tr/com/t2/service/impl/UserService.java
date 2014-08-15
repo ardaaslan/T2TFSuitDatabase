@@ -82,5 +82,15 @@ public class UserService implements IUserService{
     public void deleteProject(T2TFProject project) {
         userDAO.deleteProject(project);
     }
+
+    @Override
+    public void updateProject(T2TFProject oldProject, T2TFProject newProject) {
+       userDAO.updateProject(oldProject, newProject);
+    }
+
+    @Override
+    public List<T2TFProject> listAllProjects() {
+        return userDAO.listAllProjects();
+    }
         
 }
