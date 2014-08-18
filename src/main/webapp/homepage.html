@@ -161,7 +161,67 @@
                 <button type="button" class="btn btn-lg btn-default" id="deleteProjectBttn">Delete ProjectX</button>
                 
             </div>
-        </div>    
+        </div>
+        
+        <div id="openModalProject" class="modalDialog">
+	<div>
+		<h2>Create Project</h2>
+		 <form id = "modalProjectId">
+            <fieldset>
+                <p>
+                    <label for="projectname">Project Name</label><br/>
+                    <input type="text" name="projectname" id="modalProjectName" placeholder="">
+                </p>
+                <p>
+                    <label for="description">Description</label><br/>
+                    <input type="text" name="description" id="modalDescription"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmProject()" id="confirmBttn">Confirm</button>
+        </form>
+	</div>
+</div>
+        
+        <div id="openModalTestSuite" class="modalDialog">
+	<div>
+		<h2>Create Test Suite</h2>
+		 <form id = "modalTestSuiteId">
+            <fieldset>
+                <p>
+                    <label for="testsuitename">Test Suite Name</label><br/>
+                    <input type="text" name="testsuitename" id="modalTestSuiteName" placeholder="">
+                </p>
+                <p>
+                    <label for="description">Description</label><br/>
+                    <input type="text" name="description" id="modal1Description"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmTestSuite()" id="confirm1Bttn">Confirm</button>
+        </form>
+	</div>
+</div>
+        
+                <div id="openModalUpdateProject" class="modalDialog">
+	<div>
+		<h2>Update Project</h2>
+		 <form id = "modalUpdateProject">
+            <fieldset>
+                <p>
+                    <label for="updateprojectname">New Project Name</label><br/>
+                    <input type="text" name="updateprojectname" id="modalUpdateProjectName" placeholder="">
+                </p>
+                <p>
+                    <label for="updatedescription">New Description</label><br/>
+                    <input type="text" name="updatedescription" id="modal2Description"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmUpdateProject()" id="confirm2Bttn">Confirm</button>
+        </form>
+	</div>
+</div>
 
         <!-- End of the Project and Test Suite Grid-->
 <script type="text/javascript">
@@ -171,11 +231,64 @@
              //   document.getElementById("testsuitelabel").style.visibility = "visible";
             }
         </script>
+     <script type="text/javascript">
+            function confirmUpdateProject() {
+                document.getElementById("openModalUpdateProject").style.visibility = "hidden";
+                updateProject();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>   
+        
+<script type="text/javascript">
+            function confirmProject() {
+                document.getElementById("openModalProject").style.visibility = "hidden";
+                addProjectToAccordion();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+  <script type="text/javascript">
+            function confirmTestSuite() {
+                document.getElementById("openModalTestSuite").style.visibility = "hidden";
+                createTestSuitePrompt();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+  <script type="text/javascript">
+            function createModalTestSuite() {
+                document.getElementById("openModalTestSuite").style.visibility = "visible";
+                var form_elements = $("#modalTestSuiteId").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
 
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+        <script type="text/javascript">
+            function createUpdateModalProject() {
+                document.getElementById("openModalUpdateProject").style.visibility = "visible";
+                var form_elements = $("#modalUpdateProject").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
+
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
     
      <script>
-            function addProjectToAccordion(projectName) {
-            var argumentToPass = projectName + "suites";   
+            function addProjectToAccordion() {
+            //var projectName = $("#openModalProject").attr;
+            var form_elements = $("#modalProjectId").find(":input");
+            var projectName = form_elements[0].value;
+            var argumentToPass = projectName + "suites";   // bu lazım *** 
             var strVar="";
                 strVar += " <div class=\"panel panel-default\" id=\""+projectName+"default\">";
                 strVar += "                <div class=\"panel-heading\" id=\""+projectName+"heading\">";
@@ -188,7 +301,7 @@
                 strVar += "                <!-- Beginning of create a test suite-->";
                 strVar += "                <div id=\""+projectName+"suites\" class=\"panel-collapse collapse\">";
                 strVar += "                    <div class=\"panel-body\">";
-                strVar += "                        <button type=\"button\""+ "onClick=\"createTestSuitePrompt("+argumentToPass+")\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+                strVar += "                        <button type=\"button\""+ "onClick=\"createModalTestSuite()\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
                 strVar += "                    <\/div>";
                 strVar += "                <\/div>";
                 strVar += "                <!-- End of create a test suite-->";
@@ -215,18 +328,24 @@
                     console.log(data);
                 }     
             }); 
-         }
+  
+    }
         </script>
         
         <script>
-                function createTestSuitePrompt(projectName) {
-         var testSuite = prompt("Please enter your test suite name");
+                function createTestSuitePrompt() {
+                    //PROJEctname = projectname+suites
+        var form_elements = $("#modalTestSuiteId").find(":input");
+        var testSuite = form_elements[0].value;
+        var form_elements1 = $("#modalProjectId").find(":input");
+        var ajaxProjectName = form_elements1[0].value;
+        console.log(ajaxProjectName);
          var argumentToPass = testSuite + "tests";
          //var realTestSuiteName = $(testSuite).attr('id');
          //var ajaxTestSuiteName = realTestSuiteName.substring(0,((realTestSuiteName.length)-5));
-         var realProjectName = $(projectName).attr('id');
-         var ajaxProjectName = realProjectName.substring(0,((realProjectName.length)-6));
-        
+         //var realProjectName = $(projectName).attr('id');
+         //var ajaxProjectName = realProjectName.substring(0,((realProjectName.length)-6));
+        //ajaxporjectName orijinal ad , real suitesli hal
          if (testSuite != null) {
          var strVar="";
 //strVar += " <div id=\""+testSuite+"\" class=\"panel-collapse collapse\">";
@@ -239,8 +358,8 @@ strVar += "                    <\/div>";
 //strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
 //strVar += "                    <\/div>";
 //strVar += "                <\/div>";
-                
-$(projectName).prepend(strVar);
+var toBeAdded = document.getElementById(ajaxProjectName+"suites");  
+$(toBeAdded).prepend(strVar);
    
             var allURL = window.location.toString();
             var userName = allURL.substring(allURL.indexOf("=")+1);
@@ -274,13 +393,18 @@ $(projectName).prepend(strVar);
         
         <script>
             function createProjectPrompt() {
-                var project = prompt("Please enter your project name");
-
-                if (project != null) {
+                //var project = prompt("Please enter your project name");
+            var form_elements = $("#modalProjectId").find(":input");
+            form_elements[0].value = "";
+            form_elements[1].value = "";
+            document.getElementById("openModalProject").style.visibility = "visible";
+                            document.getElementById("createProject").innerHTML =
+                            document.getElementById("createProject").innerHTML;     
+        /*  if (project != null) {
                     document.getElementById("createProject").innerHTML =
                             document.getElementById("createProject").innerHTML;
                    addProjectToAccordion(project);
-                }
+                }*/
             }
         </script>
         
@@ -325,7 +449,8 @@ strVar += "        <\/div>  ";
         
         <script>
             function showProject(projectName) {  
-        var realProjectName = $(projectName).attr('id');        
+   
+        var realProjectName = $(projectName).attr('id');  
         var strVar="";
 strVar += "<span class=\"label pull-right\" style=\"color:black;\" id=\"testsuitelabel\">";
 strVar += "        <\/span>";
@@ -334,7 +459,7 @@ strVar += "<div style=\"position: absolute; top:80px; left:275px; width:200px; h
 
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
-strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"updateProject("+realProjectName+")\"" +"id=\"updateProjectBttn\">Update Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"createUpdateModalProject()\"" +"id=\"updateProjectBttn\">Update Project<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"deleteProject("+realProjectName+")\"" +" id=\"deleteProjectBttn\">Delete Project<\/button>";
 strVar += "            <\/div>";
 strVar += "        <\/div>    ";
@@ -344,6 +469,11 @@ strVar += "        <\/div>    ";
                 document.getElementById("testsuitegrid").style.visibility = "visible";
                 document.getElementById("testsuitegrid").innerHTML = strVar;
                // document.getElementById("testsuitelabel").style.visibility = "visible";
+        var form_elements = $("#modalProjectId").find(":input");        
+        var realProjectName = $(projectName).attr('id'); 
+        form_elements[0].value= realProjectName;
+
+      
             }
         </script>
         
@@ -379,11 +509,17 @@ strVar += "        <\/div>    ";
         </script>
         
          <script>
-            function updateProject(projectName) {  
+            function updateProject() {  
             var allURL = window.location.toString();
             var userName = allURL.substring(allURL.indexOf("=")+1);
-            var newProject = prompt("Please enter your new project name");
-            var realProjectName = $(projectName).attr('id');
+            //var newProject = prompt("Please enter your new project name");
+              var form_elements1 = $("#modalProjectId").find(":input");
+              var oldProject = form_elements1[0].value;
+              
+              var form_elements2 = $("#modalUpdateProject").find(":input");
+              var newProject = form_elements2[0].value;
+              
+      //  var realProjectName = $(projectName).attr('id');
           
             var argumentToPass = newProject + "suites";   
             var strVar="";
@@ -404,14 +540,14 @@ strVar += "        <\/div>    ";
                 strVar += "                <!-- End of create a test suite-->";
                 strVar += "            <\/div>";        
                 
-                var oldId = document.getElementById(realProjectName +"default");
+                var oldId = document.getElementById(oldProject +"default");
                 oldId.innerHTML = strVar;
                 oldId.id = newProject + "default";
              $.ajax({ 
                 url : "UpdateProject",
                 data: {
                     oldProjectInfo : JSON.stringify({ 
-                        projectName: realProjectName ,
+                        projectName: oldProject ,
                         userName   :userName        
                     }),
                     newProjectInfo : JSON.stringify({ 
@@ -426,7 +562,7 @@ strVar += "        <\/div>    ";
                     console.log("success ?");
                 }     
             }); 
-               
+               form_elements1[0].value = newProject;  // ESKI ID YI YENİ IDYE SETLİYORUz
             }
         </script>
         
