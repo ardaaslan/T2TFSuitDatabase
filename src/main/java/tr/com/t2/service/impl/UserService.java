@@ -92,5 +92,10 @@ public class UserService implements IUserService{
     public List<T2TFProject> listAllProjects() {
         return userDAO.listAllProjects();
     }
+
+    @Override
+    public void deleteTestSuite(T2TFTestSuite suite) {
+        userDAO.deleteTestSuite(suite);
+    }
         
 }

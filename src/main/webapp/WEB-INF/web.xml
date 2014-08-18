@@ -35,6 +35,10 @@
         <servlet-name>deleteProject</servlet-name>
         <servlet-class>tr.com.t2.controller.DeleteProjectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteTestSuite</servlet-name>
+        <servlet-class>tr.com.t2.controller.DeleteTestSuiteServlet</servlet-class>
+    </servlet>
      <servlet>
         <servlet-name>updateProject</servlet-name>
         <servlet-class>tr.com.t2.controller.UpdateProjectServlet</servlet-class>
@@ -54,6 +58,10 @@
     <servlet-mapping>
         <servlet-name>deleteProject</servlet-name>
         <url-pattern>/DeleteProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteTestSuite</servlet-name>
+        <url-pattern>/DeleteTestSuite</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateProject</servlet-name>

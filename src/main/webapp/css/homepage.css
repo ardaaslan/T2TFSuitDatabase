@@ -131,6 +131,20 @@
     position:relative;
     width: 600px;
 }
+
+#deleteTestSuiteBttn{
+    margin-bottom: -250px;
+    margin-left: 150px;
+    position:relative;
+    width: 600px;
+}
+
+#updateTestSuiteBttn{
+    margin-bottom: -250px;
+    margin-left: 50px;
+    position:relative;
+    width: 600px;
+}
 #testsuitegridbttns{
     margin-top: 430px;
 }

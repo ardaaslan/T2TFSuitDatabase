@@ -176,5 +176,14 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
         List<T2TFProject> result = namedParameterJdbcTemplate.query("SELECT * FROM projects", parameters, rowMapperProject);
         return result;
     }
+
+    @Override
+    public void deleteTestSuite(T2TFTestSuite suite) {
+        jdbcTemplate.update("DELETE FROM testsuites "
+                + "where userName = ? AND "
+                + "projectName = ? AND "
+                + "testSuiteName = ?"
+                ,new Object[]{suite.getUserName(),suite.getProjectName(),suite.getTestSuiteName()},new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
+    }
     
 }

@@ -35,5 +35,7 @@ public interface T2TFUserDAO {
     void deleteProject(T2TFProject project);
     
     void updateProject(T2TFProject oldProject, T2TFProject newProject);
+    
+     void deleteTestSuite (T2TFTestSuite suite);
    
 }
