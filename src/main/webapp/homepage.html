@@ -222,6 +222,26 @@
         </form>
 	</div>
 </div>
+        
+            <div id="openModalUpdateTestSuite" class="modalDialog">
+	<div>
+		<h2>Update Test Suite</h2>
+		 <form id = "modalUpdateTestSuite">
+            <fieldset>
+                <p>
+                    <label for="updatetestsuitename">New Test Suite Name</label><br/>
+                    <input type="text" name="updatetestsuitename" id="modalUpdateTestSuiteName" placeholder="">
+                </p>
+                <p>
+                    <label for="update1description">New Description</label><br/>
+                    <input type="text" name="update1description" id="modal3Description"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmUpdateTestSuite()" id="confirm3Bttn">Confirm</button>
+        </form>
+	</div>
+</div>
 
         <!-- End of the Project and Test Suite Grid-->
 <script type="text/javascript">
@@ -235,6 +255,15 @@
             function confirmUpdateProject() {
                 document.getElementById("openModalUpdateProject").style.visibility = "hidden";
                 updateProject();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>   
+        
+     <script type="text/javascript">
+            function confirmUpdateTestSuite() {
+                document.getElementById("openModalUpdateTestSuite").style.visibility = "hidden";
+                updateTestSuite();
                // document.getElementById("testsuitegrid").style.visibility = "visible";
                //   document.getElementById("testsuitelabel").style.visibility = "visible";
             }
@@ -271,6 +300,19 @@
         </script>
         
         <script type="text/javascript">
+            function createUpdateModalTestSuite() {
+                document.getElementById("openModalUpdateTestSuite").style.visibility = "visible";
+                var form_elements = $("#modalUpdateTestSuite").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
+
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+         <script type="text/javascript">
             function createUpdateModalProject() {
                 document.getElementById("openModalUpdateProject").style.visibility = "visible";
                 var form_elements = $("#modalUpdateProject").find(":input");
@@ -420,7 +462,8 @@ $(toBeAdded).prepend(strVar);
             var form_elements1 = $("#modalTestSuiteId").find(":input");
             form_elements1[0].value= ajax2TestSuiteName;
         var ajaxTestSuiteName = form_elements1[0].value;     
-              
+           
+             
               
        
         var strVar="";
@@ -443,7 +486,7 @@ strVar += "            <div id=\"testsuitegridbttns\">";
 strVar += "         <div style=\"position: absolute; top:80px; left:275px; width:200px; height:10px\">"+ajaxProjectName+"-"+ajax2TestSuiteName+"<\/div> ";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
-strVar += "               <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"updateTestSuiteBttn\">Update Test Suite<\/button>";
+strVar += "               <button type=\"button\" class=\"btn btn-lg btn-default\""+"onClick=\"createUpdateModalTestSuite()\"" +"id=\"updateTestSuiteBttn\">Update Test Suite<\/button>";
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\""+"onClick=\"deleteTestSuite("+ajaxTestSuiteName+"tests"+")\"" +"  id=\"deleteTestSuiteBttn\">Delete Test Suite<\/button>";
 strVar += "            <\/div>";
 strVar += "        <\/div>  ";
@@ -490,6 +533,8 @@ strVar += "        <\/div>    ";
             }
         </script>
         
+        
+        
              <script>
             function deleteTestSuite(testSuiteName) {  
             var form_elements = $("#modalProjectId").find(":input");
@@ -498,8 +543,7 @@ strVar += "        <\/div>    ";
             var ajaxTestSuiteName = realTestSuiteName.substring(0,((realTestSuiteName.length)-5));
             var allURL = window.location.toString();
             var userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1); 
-            console.log(ajaxProjectName);
-            console.log(ajaxTestSuiteName);
+ 
               $("#"+realTestSuiteName).remove();
              // $("#"+realProjectName+"suites").remove();
             //  $("#"+realProjectName+"heading").remove();
@@ -618,6 +662,84 @@ strVar += "        <\/div>    ";
                 }     
             }); 
                form_elements1[0].value = newProject;  // ESKI ID YI YENİ IDYE SETLİYORUz
+            }
+        </script>
+        
+        <script>
+            function updateTestSuite() {  
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+                  if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+            //var newProject = prompt("Please enter your new project name");
+              var form_elements1 = $("#modalProjectId").find(":input");
+              var oldProject = form_elements1[0].value;
+              
+              var form_elements2 = $("#modalTestSuiteId").find(":input");
+              var oldTestSuite = form_elements2[0].value;
+              
+              var form_elements3 = $("#modalUpdateTestSuite").find(":input");
+              var newTestSuite = form_elements3[0].value;
+     
+      //  var realProjectName = $(projectName).attr('id');
+          
+            var argumentToPass = newTestSuite + "tests";   
+            var strVar="";
+            //strVar += " <div id=\""+testSuite+"\" class=\"panel-collapse collapse\">";
+            strVar += "                    <div id=\""+newTestSuite+"tests"+"\""+"onClick=\"showTestSuite("+argumentToPass+")\"" +" class=\"panel-body\">";
+            strVar += "                        <a href=\"#\" style=\"color:gray\">";
+            strVar += "                            " + newTestSuite;
+            strVar += "                        <\/a>";
+            strVar += "                    <\/div>";
+            //strVar += "                    <div class=\"panel-body\">";
+            //strVar += "                        <button type=\"button\" class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+            //strVar += "                    <\/div>";
+            //strVar += "                <\/div>";
+        
+        
+        /*var strVar="";
+                strVar += " <div class=\"panel panel-default\" id=\""+newProject+"default\">";
+                strVar += "                <div class=\"panel-heading\" id=\""+newProject+"heading\">";
+                strVar += "                    <h4 class=\"panel-title\""+"onClick=\"showProject("+newProject+")\"" +" id=\""+newProject+"\">";
+                strVar += "                        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#"+newProject+"suites\">";
+                strVar += "                            " + newProject;
+                strVar += "                        <\/a>";
+                strVar += "                    <\/h4>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- Beginning of create a test suite-->";
+                strVar += "                <div id=\""+newProject+"suites\" class=\"panel-collapse collapse\">";
+                strVar += "                    <div class=\"panel-body\">";
+                strVar += "                        <button type=\"button\""+ "onClick=\"createTestSuitePrompt("+argumentToPass+")\"" +"class=\"btn pull-right btn-lg btn-default\">Create Test Suite<\/button>";
+                strVar += "                    <\/div>";
+                strVar += "                <\/div>";
+                strVar += "                <!-- End of create a test suite-->";
+                strVar += "            <\/div>";   */     
+                
+                var oldId = document.getElementById(oldTestSuite +"tests");
+                oldId.outerHTML = strVar;
+                oldId.id = newTestSuite + "tests";
+             $.ajax({ 
+                url : "UpdateTestSuite",
+                data: {
+                    oldTestSuiteInfo : JSON.stringify({ 
+                        projectName: oldProject ,
+                        userName   :userName ,
+                        testSuiteName : oldTestSuite
+                    }),
+                    newTestSuiteInfo : JSON.stringify({ 
+                        projectName: oldProject ,
+                        userName   :userName ,
+                        testSuiteName : newTestSuite
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            }); 
+               form_elements2[0].value = newTestSuite;  // ESKI ID YI YENİ IDYE SETLİYORUz
             }
         </script>
         

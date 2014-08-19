@@ -43,4 +43,6 @@ public interface IUserService {
     
     void deleteTestSuite(T2TFTestSuite suite);
     
+    void updateTestSuite(T2TFTestSuite oldTestSuite, T2TFTestSuite newTestSuite);
+    
 }

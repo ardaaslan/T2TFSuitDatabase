@@ -43,6 +43,11 @@
         <servlet-name>updateProject</servlet-name>
         <servlet-class>tr.com.t2.controller.UpdateProjectServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>updateTestSuite</servlet-name>
+        <servlet-class>tr.com.t2.controller.UpdateTestSuiteServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>createTestSuite</servlet-name>
         <servlet-class>tr.com.t2.controller.CreateTestSuiteServlet</servlet-class>
@@ -66,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>updateProject</servlet-name>
         <url-pattern>/UpdateProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateTestSuite</servlet-name>
+        <url-pattern>/UpdateTestSuite</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createTestSuite</servlet-name>

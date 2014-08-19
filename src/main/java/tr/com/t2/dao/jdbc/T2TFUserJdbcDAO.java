@@ -185,5 +185,18 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                 + "testSuiteName = ?"
                 ,new Object[]{suite.getUserName(),suite.getProjectName(),suite.getTestSuiteName()},new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
     }
+
+    @Override
+    public void updateTestSuite(T2TFTestSuite oldTestSuite, T2TFTestSuite newTestSuite) {
+        jdbcTemplate.update("UPDATE testsuites SET "+
+                "userName = ?,"+
+                "projectName = ?, "+
+                "testSuiteName = ? "+
+                "where userName = ? "+
+                "AND projectName = ? "+
+                "AND testSuiteName = ?"
+                ,new Object[]{newTestSuite.getUserName(),newTestSuite.getProjectName(),newTestSuite.getTestSuiteName(),oldTestSuite.getUserName(),oldTestSuite.getProjectName(),oldTestSuite.getTestSuiteName()}
+                ,new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
+    }
     
 }

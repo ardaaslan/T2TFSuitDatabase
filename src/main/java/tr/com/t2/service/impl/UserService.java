@@ -97,5 +97,10 @@ public class UserService implements IUserService{
     public void deleteTestSuite(T2TFTestSuite suite) {
         userDAO.deleteTestSuite(suite);
     }
+
+    @Override
+    public void updateTestSuite(T2TFTestSuite oldTestSuite, T2TFTestSuite newTestSuite) {
+       userDAO.updateTestSuite(oldTestSuite, newTestSuite);
+    }
         
 }
