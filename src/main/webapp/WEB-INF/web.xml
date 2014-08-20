@@ -31,6 +31,10 @@
         <servlet-name>createProject</servlet-name>
         <servlet-class>tr.com.t2.controller.CreateProjectServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>createTestCase</servlet-name>
+        <servlet-class>tr.com.t2.controller.CreateTestCaseServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>deleteProject</servlet-name>
         <servlet-class>tr.com.t2.controller.DeleteProjectServlet</servlet-class>
@@ -39,11 +43,19 @@
         <servlet-name>deleteTestSuite</servlet-name>
         <servlet-class>tr.com.t2.controller.DeleteTestSuiteServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>deleteTestCase</servlet-name>
+        <servlet-class>tr.com.t2.controller.DeleteTestCaseServlet</servlet-class>
+    </servlet>
      <servlet>
         <servlet-name>updateProject</servlet-name>
         <servlet-class>tr.com.t2.controller.UpdateProjectServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>updateTestCase</servlet-name>
+        <servlet-class>tr.com.t2.controller.UpdateTestCaseServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>updateTestSuite</servlet-name>
         <servlet-class>tr.com.t2.controller.UpdateTestSuiteServlet</servlet-class>
@@ -61,6 +73,10 @@
         <url-pattern>/CreateProject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>createTestCase</servlet-name>
+        <url-pattern>/CreateTestCase</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>deleteProject</servlet-name>
         <url-pattern>/DeleteProject</url-pattern>
     </servlet-mapping>
@@ -68,9 +84,17 @@
         <servlet-name>deleteTestSuite</servlet-name>
         <url-pattern>/DeleteTestSuite</url-pattern>
     </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>deleteTestCase</servlet-name>
+        <url-pattern>/DeleteTestCase</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateProject</servlet-name>
         <url-pattern>/UpdateProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateTestCase</servlet-name>
+        <url-pattern>/UpdateTestCase</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateTestSuite</servlet-name>

@@ -21,6 +21,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import tr.com.t2.dao.T2TFUserDAO;
 import tr.com.t2.domain.T2TFProject;
+import tr.com.t2.domain.T2TFTestCase;
 import tr.com.t2.domain.T2TFTestSuite;
 import tr.com.t2.domain.T2TFUser;
 
@@ -34,6 +35,7 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
     private SimpleJdbcInsert insertUser;
     private SimpleJdbcInsert insertProject;
     private SimpleJdbcInsert insertTestSuite;
+    private SimpleJdbcInsert insertTestCase;
     
     @PostConstruct
     public void aftePropertiesSet(){
@@ -41,6 +43,7 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
         this.insertUser = new SimpleJdbcInsert(jdbcTemplate).withTableName("users");
          this.insertProject = new SimpleJdbcInsert(jdbcTemplate).withTableName("projects");
          this.insertTestSuite = new SimpleJdbcInsert(jdbcTemplate).withTableName("testsuites");
+         this.insertTestCase = new SimpleJdbcInsert(jdbcTemplate).withTableName("testcases");
         
     }
     private final RowMapper<T2TFTestSuite> rowMapperTestSuite = new RowMapper<T2TFTestSuite>(){
@@ -52,6 +55,20 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
             testSuite.setProjectName(rs.getString("projectName"));
             testSuite.setTestSuiteName(rs.getString("testSuiteName"));
             return testSuite;
+        }        
+            
+    };
+    
+     private final RowMapper<T2TFTestCase> rowMapperTestCase = new RowMapper<T2TFTestCase>(){
+
+        @Override
+        public T2TFTestCase mapRow(ResultSet rs, int i) throws SQLException {
+            T2TFTestCase testCase = new T2TFTestCase();
+            testCase.setUserName(rs.getString("userName"));
+            testCase.setProjectName(rs.getString("projectName"));
+            testCase.setTestSuiteName(rs.getString("testSuiteName"));
+            testCase.setTestCaseName(rs.getString("testCaseName"));
+            return testCase;
         }        
             
     };
@@ -197,6 +214,41 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                 "AND testSuiteName = ?"
                 ,new Object[]{newTestSuite.getUserName(),newTestSuite.getProjectName(),newTestSuite.getTestSuiteName(),oldTestSuite.getUserName(),oldTestSuite.getProjectName(),oldTestSuite.getTestSuiteName()}
                 ,new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
+    }
+
+    @Override
+    public void createTestCase(T2TFTestCase testCase) {
+            MapSqlParameterSource projectParameters = new MapSqlParameterSource();
+               projectParameters.addValue("userName", testCase.getUserName());
+               projectParameters.addValue("projectName",testCase.getProjectName());
+               projectParameters.addValue("testSuiteName",testCase.getTestSuiteName());
+               projectParameters.addValue("testCaseName",testCase.getTestCaseName());
+               this.insertTestCase.execute(projectParameters);
+    }
+
+    @Override
+    public void deleteTestCase(T2TFTestCase testCase) {
+        jdbcTemplate.update("DELETE FROM testcases "
+                + "where userName = ? AND "
+                + "projectName = ? AND "
+                + "testSuiteName = ? AND "
+                + "testCaseName = ?"
+                ,new Object[]{testCase.getUserName(),testCase.getProjectName(),testCase.getTestSuiteName(),testCase.getTestCaseName()},new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
+    }
+
+    @Override
+    public void updateTestCase(T2TFTestCase oldTestCase,T2TFTestCase newTestCase) {
+        jdbcTemplate.update("UPDATE testcases SET "+
+                "userName = ?,"+
+                "projectName = ?, "+
+                "testSuiteName = ?, "+
+                "testCaseName = ? "+
+                "where userName = ? "+
+                "AND projectName = ? "+
+                "AND testSuiteName = ? "+
+                "AND testCaseName = ? "
+                ,new Object[]{newTestCase.getUserName(),newTestCase.getProjectName(),newTestCase.getTestSuiteName(),newTestCase.getTestCaseName(),oldTestCase.getUserName(),oldTestCase.getProjectName(),oldTestCase.getTestSuiteName(),oldTestCase.getTestCaseName()}
+                ,new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
     }
     
 }

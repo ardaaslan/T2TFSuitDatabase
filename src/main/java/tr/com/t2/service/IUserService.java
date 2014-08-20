@@ -8,6 +8,7 @@ package tr.com.t2.service;
 
 import java.util.List;
 import tr.com.t2.domain.T2TFProject;
+import tr.com.t2.domain.T2TFTestCase;
 import tr.com.t2.domain.T2TFTestSuite;
 import tr.com.t2.domain.T2TFUser;
 
@@ -44,5 +45,11 @@ public interface IUserService {
     void deleteTestSuite(T2TFTestSuite suite);
     
     void updateTestSuite(T2TFTestSuite oldTestSuite, T2TFTestSuite newTestSuite);
+    
+    void createTestCase(T2TFTestCase testCase);
+    
+    void deleteTestCase(T2TFTestCase testCase);
+    
+    void updateTestCase(T2TFTestCase oldTestCase, T2TFTestCase newTestCase);
     
 }

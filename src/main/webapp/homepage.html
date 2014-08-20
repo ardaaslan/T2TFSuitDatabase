@@ -144,6 +144,8 @@
         </span>
         <div class="well pull-right" id="testsuitegrid">
             <div class="well pull-right" id="testcasegrid">
+                <div class="well pull-right" id="realtestcasegrid">
+            </div>
                 <button type="button" class="btn btn-lg btn-default pull-right" id="addTestCaseBttn">Add a Test Case</button>
                 <br/>
                 <br/>
@@ -242,6 +244,69 @@
         </form>
 	</div>
 </div>
+        
+        
+        
+        
+        <div id="openModalTestCase" class="modalDialog">
+	<div>
+		<h2>Create Test Case</h2>
+		 <form id = "modalTestCaseId">
+            <fieldset>
+                <p>
+                    <label for="testcasename">Test Case Name</label><br/>
+                    <input type="text" name="testcasename" id="modalTestCaseName" placeholder="">
+                </p>
+                <p>
+                    <label for="update2description">Description</label><br/>
+                    <input type="text" name="update2description" id="modal4Description"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmCreateTestCase()" id="confirm4Bttn">Confirm</button>
+        </form>
+	</div>
+</div>
+        
+         <div id="openModalUpdateTestCase" class="modalDialog">
+	<div>
+		<h2>Update Test Case</h2>
+		 <form id = "modalUpdateTestCase">
+            <fieldset>
+                <p>
+                    <label for="newtestcasename">New Test Case Name</label><br/>
+                    <input type="text" name="newtestcasename" id="modalUpdateTestCaseName" placeholder="">
+                </p>
+                <p>
+                    <label for="update3description">New Description</label><br/>
+                    <input type="text" name="update3description" id="modal5Description"  placeholder="">
+                </p>
+    
+            </fieldset>
+                     <button type="button" class="btn btn-lg btn-default pull-right" onClick="confirmUpdateTestCase()" id="confirm5Bttn">Confirm</button>
+        </form>
+	</div>
+</div>
+        
+        <div id="modalTestCaseVariable" class="modalDialog">
+	<div>
+		<h2>Update Project</h2>
+		 <form id = "modalTestCaseVariableId">
+            <fieldset>
+                <p>
+                    <label for="vartestcasename">New Project Name</label><br/>
+                    <input type="text" name="vartestcasename" id="modalTestCaseVariableName" placeholder="">
+                </p>
+                <p>
+                    <label for="vardescription">New Description</label><br/>
+                    <input type="text" name="vardescription" id="modalVarDescription"  placeholder="">
+                </p>
+    
+            </fieldset>
+                    
+        </form>
+	</div>
+</div>
 
         <!-- End of the Project and Test Suite Grid-->
 <script type="text/javascript">
@@ -260,10 +325,28 @@
             }
         </script>   
         
+        <script type="text/javascript">
+            function confirmUpdateTestCase() {
+                document.getElementById("openModalUpdateTestCase").style.visibility = "hidden";
+                updateTestCase();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>   
+        
      <script type="text/javascript">
             function confirmUpdateTestSuite() {
                 document.getElementById("openModalUpdateTestSuite").style.visibility = "hidden";
                 updateTestSuite();
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+        <script type="text/javascript">
+            function confirmCreateTestCase() {
+                document.getElementById("openModalTestCase").style.visibility = "hidden";
+                createTestCase();
                // document.getElementById("testsuitegrid").style.visibility = "visible";
                //   document.getElementById("testsuitelabel").style.visibility = "visible";
             }
@@ -316,6 +399,43 @@
             function createUpdateModalProject() {
                 document.getElementById("openModalUpdateProject").style.visibility = "visible";
                 var form_elements = $("#modalUpdateProject").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
+
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        
+        <script type="text/javascript">
+            function createUpdateModalProject() {
+                document.getElementById("openModalUpdateProject").style.visibility = "visible";
+                var form_elements = $("#modalUpdateProject").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
+
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        <script type="text/javascript">
+            function createModalTestCase() {
+                document.getElementById("openModalTestCase").style.visibility = "visible";
+                var form_elements = $("#modalTestCaseId").find(":input");
+                    form_elements[0].value = "";
+                    form_elements[1].value = "";
+
+
+               // document.getElementById("testsuitegrid").style.visibility = "visible";
+               //   document.getElementById("testsuitelabel").style.visibility = "visible";
+            }
+        </script>
+        <script type="text/javascript">
+            function updateModalTestCase() {
+                document.getElementById("openModalUpdateTestCase").style.visibility = "visible";
+                var form_elements = $("#modalUpdateTestCase").find(":input");
                     form_elements[0].value = "";
                     form_elements[1].value = "";
 
@@ -434,6 +554,65 @@ $(toBeAdded).prepend(strVar);
             }
         </script>
         
+        <script>
+                function createTestCase() {
+                    //PROJEctname = projectname+suites
+        var form_elements = $("#modalTestSuiteId").find(":input");
+        var testSuite = form_elements[0].value;
+        var form_elements1 = $("#modalProjectId").find(":input");
+        var ajaxProjectName = form_elements1[0].value;
+        var form_elements2 = $("#modalTestCaseId").find(":input");
+        var ajaxTestCaseName = form_elements2[0].value;
+        
+   
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+                  if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+ 
+
+            $.ajax({ 
+                url : "CreateTestCase",
+                data: {
+                    testCaseInfo : JSON.stringify({ 
+                        projectName: ajaxProjectName ,
+                        userName   :userName     ,
+                        testSuiteName : testSuite,
+                        testCaseName : ajaxTestCaseName
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            }); 
+      //  TEST CASE ADI EKLEYİNCE BUTON KAYMASINI ENGELLİYORUZ
+      /*  document.getElementById("addTestCaseBttn").style.position = "fixed";
+        document.getElementById("deleteTestCaseBttn").style.position = "fixed";
+        document.getElementById("updateTestCaseBttn").style.position = "fixed";
+        document.getElementById("runTestCaseBttn").style.position = "fixed";*/
+        var argumentToPass = ajaxTestCaseName+"testcase";
+        $("#realtestcasegrid").prepend("<label onClick=\"currentTestCase("+argumentToPass+")\" id=\""+ajaxTestCaseName+"testcase"+"\"style=\"margin-top:-300px;\" >"+ajaxTestCaseName+" <\/label> <br\/>");
+        
+      
+        
+        }
+            
+        </script>
+        
+         <script>
+            function currentTestCase(ajaxTestCaseName) {
+            var realTestCaseName = $(ajaxTestCaseName).attr('id');
+            var ajax2TestCaseName = realTestCaseName.substring(0,((realTestCaseName.length)-8));    
+            var form_elements2 = $("#modalTestCaseId").find(":input");
+            form_elements2[0].value = ajax2TestCaseName;
+            
+        //document.getElementById("")
+            }
+        </script>
+        
         
         
         <script>
@@ -472,12 +651,16 @@ strVar += "        <span class=\"label pull-right\" style=\"color:black;\" id=\"
 strVar += "        <\/span>";
 strVar += "        <div class=\"well pull-right\" id=\"testsuitegrid\">";
 strVar += "            <div class=\"well pull-right\" id=\"testcasegrid\">";
-strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" id=\"addTestCaseBttn\">Add a Test Case<\/button>";
+strVar += "                 <div class=\"well pull-right\" id=\"realtestcasegrid\"><\/div>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" "+"onClick=\"createModalTestCase()\"" +" id=\"addTestCaseBttn\">Add a Test Case<\/button>";
 strVar += "                <br\/>";
+
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" "+"onClick=\"deleteTestCase()\"" +"id=\"deleteTestCaseBttn\">Delete Test Case<\/button>";
 strVar += "                <br\/>";
-strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" id=\"deleteTestCaseBttn\">Delete a Test Case<\/button>";
+
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" "+"onClick=\"updateModalTestCase()\"" +"id=\"updateTestCaseBttn\">Update Test Case<\/button>";
 strVar += "                <br\/>";
-strVar += "                <br\/>";
+
 strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default pull-right\" id=\"runTestCaseBttn\">Run a Test Case<\/button>";
 strVar += "            <\/div>";
 strVar += "";
@@ -567,6 +750,29 @@ strVar += "        <\/div>    ";
                 document.getElementById("testsuitelabel").innerHTML = "";
                  document.getElementById("testsuitegrid").style.visibility = "hidden";
                  document.getElementById(projectName+"default").style.visibility = "hidden";*/
+       //SHOW PROJECT YAPIYOZ BUNDAN SONRA
+       var argumentToPass = ajaxProjectName + "suites";
+        var strVar="";
+strVar += "<span class=\"label pull-right\" style=\"color:black;\" id=\"testsuitelabel\">";
+strVar += "        <\/span>";
+strVar += "<div id=\"testsuitegridbttns\">";
+strVar += "<div style=\"position: absolute; top:80px; left:275px; width:200px; height:10px\">"+ajaxProjectName+"<\/div> ";
+
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runTestSuiteBttn\">Run as Test Suite<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" id=\"runProjectBttn\">Run as Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"createUpdateModalProject()\"" +"id=\"updateProjectBttn\">Update Project<\/button>";
+strVar += "                <button type=\"button\" class=\"btn btn-lg btn-default\" "+"onClick=\"deleteProject("+argumentToPass+")\"" +" id=\"deleteProjectBttn\">Delete Project<\/button>";
+strVar += "            <\/div>";
+strVar += "        <\/div>    ";
+                //document.getElementById("accordion").style.visibility = "visible";
+               
+       
+                document.getElementById("testsuitegrid").style.visibility = "visible";
+                document.getElementById("testsuitegrid").innerHTML = strVar;
+               // document.getElementById("testsuitelabel").style.visibility = "visible";
+        var form_elements = $("#modalProjectId").find(":input");        
+        var realProjectName = $(projectName).attr('id'); 
+        form_elements[0].value= realProjectName;
             
             }
         </script>    
@@ -601,6 +807,44 @@ strVar += "        <\/div>    ";
                 document.getElementById("testsuitelabel").innerHTML = "";
                  document.getElementById("testsuitegrid").style.visibility = "hidden";
                  document.getElementById(projectName+"default").style.visibility = "hidden";
+            
+            }
+        </script>
+        
+        <script>
+            function deleteTestCase() {  
+        var form_elements = $("#modalTestSuiteId").find(":input");
+        var testSuite = form_elements[0].value;
+        var form_elements1 = $("#modalProjectId").find(":input");
+        var ajaxProjectName = form_elements1[0].value;
+        var form_elements2 = $("#modalTestCaseId").find(":input");
+        var ajaxTestCaseName = form_elements2[0].value;
+        
+        //document.getElementById(ajaxTestCaseName+"testcase")
+        $("#" + ajaxTestCaseName + "testcase").remove();
+   
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+                  if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+        $.ajax({ 
+                url : "DeleteTestCase",
+                data: {
+                    testCaseInfo : JSON.stringify({ 
+                        projectName: ajaxProjectName ,
+                        userName   :userName ,
+                        testSuiteName: testSuite,
+                        testCaseName: ajaxTestCaseName
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            });
+                
             
             }
         </script>
@@ -664,6 +908,7 @@ strVar += "        <\/div>    ";
                form_elements1[0].value = newProject;  // ESKI ID YI YENİ IDYE SETLİYORUz
             }
         </script>
+        
         
         <script>
             function updateTestSuite() {  
@@ -740,6 +985,56 @@ strVar += "        <\/div>    ";
                 }     
             }); 
                form_elements2[0].value = newTestSuite;  // ESKI ID YI YENİ IDYE SETLİYORUz
+            }
+        </script>
+        
+        <script>
+            function updateTestCase() {  
+            var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+                  if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+            //var newProject = prompt("Please enter your new project name");
+              var form_elements1 = $("#modalProjectId").find(":input");
+              var project = form_elements1[0].value;
+              
+              var form_elements2 = $("#modalTestSuiteId").find(":input");
+              var testSuite = form_elements2[0].value;
+              
+              var form_elements3 = $("#modalUpdateTestCase").find(":input");
+              var newTestCase = form_elements3[0].value;
+              
+              var form_elements4 = $("#modalTestCaseId").find(":input");
+              var oldTestCase = form_elements4[0].value;
+     
+              var oldLabelId = document.getElementById(oldTestCase+"testcase");
+              oldLabelId.id = newTestCase+"testcase";
+              oldLabelId.innerText = newTestCase;
+              
+             $.ajax({ 
+                url : "UpdateTestCase",
+                data: {
+                    oldTestCaseInfo : JSON.stringify({ 
+                        projectName: project ,
+                        userName   :userName ,
+                        testSuiteName : testSuite,
+                        testCaseName : oldTestCase
+                    }),
+                    newTestCaseInfo : JSON.stringify({ 
+                        projectName: project ,
+                        userName   :userName ,
+                        testSuiteName : testSuite,
+                        testCaseName : newTestCase
+                    })
+                },
+                dataType: 'json',
+                type:'POST',
+                cache : false ,
+                success : function(data){
+                    console.log("success ?");
+                }     
+            }); 
+              form_elements4[0].value = newTestCase;  // ESKI ID YI YENİ IDYE SETLİYORUz
             }
         </script>
         

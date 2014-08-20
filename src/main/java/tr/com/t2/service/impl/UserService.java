@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 import tr.com.t2.dao.T2TFUserDAO;
 import tr.com.t2.domain.T2TFProject;
+import tr.com.t2.domain.T2TFTestCase;
 import tr.com.t2.domain.T2TFTestSuite;
 import tr.com.t2.domain.T2TFUser;
 import tr.com.t2.service.IUserService;
@@ -101,6 +102,21 @@ public class UserService implements IUserService{
     @Override
     public void updateTestSuite(T2TFTestSuite oldTestSuite, T2TFTestSuite newTestSuite) {
        userDAO.updateTestSuite(oldTestSuite, newTestSuite);
+    }
+
+    @Override
+    public void createTestCase(T2TFTestCase testCase) {
+        userDAO.createTestCase(testCase);
+    }
+
+    @Override
+    public void deleteTestCase(T2TFTestCase testCase) {
+        userDAO.deleteTestCase(testCase);
+    }
+
+    @Override
+    public void updateTestCase(T2TFTestCase oldTestCase, T2TFTestCase newTestCase) {
+        userDAO.updateTestCase(oldTestCase, newTestCase);
     }
         
 }
