@@ -21,6 +21,12 @@ public interface T2TFUserDAO {
     
     List<T2TFProject> listAllProjects();
     
+    List<T2TFProject> getUsersProjects(String userName);
+    
+    List<T2TFTestSuite> getProjectsTestSuites(T2TFProject project);
+    
+    List<T2TFTestCase> getTestSuitesTestCases(T2TFTestSuite testSuite);
+    
     void createUser(T2TFUser user);
     
     void updateUser(T2TFUser user);

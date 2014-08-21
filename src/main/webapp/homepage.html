@@ -15,7 +15,7 @@
         
 <!--------------------------------------------------------------------------------------------------------------------------->
     </head>
-    <body>
+    <body onload="onLoad()">
         <!--<applet id="app"
         code="T2TFProject.class" 
                 >
@@ -309,7 +309,97 @@
 </div>
 
         <!-- End of the Project and Test Suite Grid-->
-<script type="text/javascript">
+            <script>
+            function onLoad() {
+                var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+            if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+            
+            var values = [];
+            var values1 = [];
+            var values2 = [];
+
+            $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "OnLoadServlet",
+        data: {
+                   userInfo : JSON.stringify({ 
+                        userName   :userName,
+                        password : "harr"
+                    })
+               },
+        success: function(data) {
+               
+                values = data;
+                $.each(values, function( index, value ) {
+                     var form_elements = $("#modalProjectId").find(":input");
+                    form_elements[0].value = values[index]['projectName'];
+                    addProjectToAccordion();
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: "OnLoadTestSuiteServlet",
+                        data: {
+                                   projectInfo : JSON.stringify({ 
+                                        userName   :userName,
+                                        projectName : values[index]['projectName']
+                                        
+                                    })
+                               },
+                        success: function(data1) {
+
+                                values1 = data1;
+                                $.each(values1, function( index1, value1 ) {
+                                     var form_elements = $("#modalProjectId").find(":input");
+                                    form_elements[0].value = values[index]['projectName'];
+                                     var form_elements1 = $("#modalTestSuiteId").find(":input");
+                                    form_elements1[0].value = values1[index1]['testSuiteName'];
+                                    createTestSuitePrompt();
+                                   /* $.ajax({
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        url: "OnLoadTestCaseServlet",
+                                        data: {
+                                                   testSuiteInfo : JSON.stringify({ 
+                                                        userName   :userName,
+                                                        projectName : values[index]['projectName'],
+                                                        testSuiteName : values1[index1]['testSuiteName']
+
+                                                    })
+                                               },
+                                        success: function(data2) {
+
+                                                values2 = data2;
+                                                $.each(values2, function( index2, value2 ) {
+                                                     var form_elements = $("#modalProjectId").find(":input");
+                                                    form_elements[0].value = values[index]['projectName'];
+                                                     var form_elements1 = $("#modalTestSuiteId").find(":input");
+                                                    form_elements1[0].value = values1[index1]['testSuiteName'];
+                                                    var form_elements2 = $("#modalTestCaseId").find(":input");
+                                                    form_elements2[0].value = values2[index2]['testCaseName'];
+                                                    createTestCase();
+
+                                                });
+                                            }
+
+                                    });*/
+
+                                });
+                            }
+
+                    });
+                });
+            }
+ 
+    });
+}
+            
+            
+        </script>
+        
+        <script type="text/javascript">
             function makeAccordionVisible() {
                 document.getElementById("accordion").style.visibility = "visible";
                // document.getElementById("testsuitegrid").style.visibility = "visible";
@@ -569,7 +659,8 @@ $(toBeAdded).prepend(strVar);
             var userName = allURL.substring(allURL.indexOf("=")+1);
                   if(allURL.charAt(allURL.length-1) == '#')
                 userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
- 
+            var argumentToPass = ajaxTestCaseName+"testcase";
+        $("#realtestcasegrid").prepend("<label onClick=\"currentTestCase("+argumentToPass+")\" id=\""+ajaxTestCaseName+"testcase"+"\"style=\"margin-top:-300px;\" >"+ajaxTestCaseName+" <\/label> <br\/>");
 
             $.ajax({ 
                 url : "CreateTestCase",
@@ -593,8 +684,7 @@ $(toBeAdded).prepend(strVar);
         document.getElementById("deleteTestCaseBttn").style.position = "fixed";
         document.getElementById("updateTestCaseBttn").style.position = "fixed";
         document.getElementById("runTestCaseBttn").style.position = "fixed";*/
-        var argumentToPass = ajaxTestCaseName+"testcase";
-        $("#realtestcasegrid").prepend("<label onClick=\"currentTestCase("+argumentToPass+")\" id=\""+ajaxTestCaseName+"testcase"+"\"style=\"margin-top:-300px;\" >"+ajaxTestCaseName+" <\/label> <br\/>");
+        
         
       
         
@@ -640,9 +730,13 @@ $(toBeAdded).prepend(strVar);
             var ajaxProjectName = form_elements[0].value;    
             var form_elements1 = $("#modalTestSuiteId").find(":input");
             form_elements1[0].value= ajax2TestSuiteName;
-        var ajaxTestSuiteName = form_elements1[0].value;     
-           
-             
+        var ajaxTestSuiteName = form_elements1[0].value;    
+         var allURL = window.location.toString();
+            var userName = allURL.substring(allURL.indexOf("=")+1);
+                  if(allURL.charAt(allURL.length-1) == '#')
+                userName = allURL.substring(allURL.indexOf("=")+1,allURL.length-1);
+            
+
               
        
         var strVar="";
@@ -680,6 +774,34 @@ strVar += "        <\/div>  ";
               document.getElementById("testsuitelabel").style.visibility = "visible";
               document.getElementById("testcasegrid").style.visibility = "visible";
                document.getElementById("testsuitegridbttns").style.visibility = "visible";
+               
+                           $.ajax({
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        url: "OnLoadTestCaseServlet",
+                                        data: {
+                                                   testSuiteInfo : JSON.stringify({ 
+                                                        userName   :userName,
+                                                        projectName : ajaxProjectName,
+                                                        testSuiteName : ajaxTestSuiteName
+
+                                                    })
+                                               },
+                                        success: function(data2) {
+
+                                                values2 = data2;
+                                                $.each(values2, function( index2, value2 ) {
+                                                    
+                                                    var form_elements2 = $("#modalTestCaseId").find(":input");
+                                                    form_elements2[0].value = values2[index2]['testCaseName'];
+                                                    var argumentToPass = form_elements2[0].value+"testcase";
+                                                    $("#realtestcasegrid").prepend("<label onClick=\"currentTestCase("+argumentToPass+")\" id=\""+form_elements2[0].value+"testcase"+"\"style=\"margin-top:-300px;\" >"+form_elements2[0].value+" <\/label> <br\/>");
+                                                        
+                                                });
+                                            }
+
+                                    }); 
+        
                       
           
  

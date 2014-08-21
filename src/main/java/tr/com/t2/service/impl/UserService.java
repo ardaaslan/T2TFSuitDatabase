@@ -118,5 +118,20 @@ public class UserService implements IUserService{
     public void updateTestCase(T2TFTestCase oldTestCase, T2TFTestCase newTestCase) {
         userDAO.updateTestCase(oldTestCase, newTestCase);
     }
+
+    @Override
+    public List<T2TFProject> getUsersProjects(String userName) {
+       return userDAO.getUsersProjects(userName);
+    }
+
+    @Override
+    public List<T2TFTestSuite> getProjectsTestSuites(T2TFProject project) {
+      return userDAO.getProjectsTestSuites(project);
+    }
+
+    @Override
+    public List<T2TFTestCase> getTestSuitesTestCases(T2TFTestSuite testSuite) {
+        return userDAO.getTestSuitesTestCases(testSuite);
+    }
         
 }

@@ -24,6 +24,18 @@
         <servlet-class>tr.com.t2.controller.MainPageServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>onLoadServlet</servlet-name>
+        <servlet-class>tr.com.t2.controller.OnLoadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>onLoadTestSuiteServlet</servlet-name>
+        <servlet-class>tr.com.t2.controller.OnLoadTestSuiteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>onLoadTestCaseServlet</servlet-name>
+        <servlet-class>tr.com.t2.controller.OnLoadTestCaseServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>registerServlet</servlet-name>
         <servlet-class>tr.com.t2.controller.RegisterServlet</servlet-class>
     </servlet>
@@ -67,6 +79,18 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>onLoadServlet</servlet-name>
+        <url-pattern>/OnLoadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>onLoadTestSuiteServlet</servlet-name>
+        <url-pattern>/OnLoadTestSuiteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>onLoadTestCaseServlet</servlet-name>
+        <url-pattern>/OnLoadTestCaseServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createProject</servlet-name>

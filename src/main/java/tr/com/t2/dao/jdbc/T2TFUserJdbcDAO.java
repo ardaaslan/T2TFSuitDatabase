@@ -250,5 +250,26 @@ public class T2TFUserJdbcDAO extends BasejdbcDAO implements T2TFUserDAO {
                 ,new Object[]{newTestCase.getUserName(),newTestCase.getProjectName(),newTestCase.getTestSuiteName(),newTestCase.getTestCaseName(),oldTestCase.getUserName(),oldTestCase.getProjectName(),oldTestCase.getTestSuiteName(),oldTestCase.getTestCaseName()}
                 ,new int[]{Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR});
     }
+
+    @Override
+    public List<T2TFProject> getUsersProjects(String userName) {
+              Map<String,Object> parameters = new HashMap<String,Object>();
+        List<T2TFProject> result = namedParameterJdbcTemplate.query("SELECT * FROM projects WHERE userName='"+userName+"'", parameters, rowMapperProject);
+        return result;
+    }
+
+    @Override
+    public List<T2TFTestSuite> getProjectsTestSuites(T2TFProject project) {
+        Map<String,Object> parameters = new HashMap<String,Object>();
+        List<T2TFTestSuite> result = namedParameterJdbcTemplate.query("SELECT * FROM testsuites WHERE userName='"+project.getUserName()+"' AND projectName = '"+project.getProjectName()+"'", parameters, rowMapperTestSuite);
+        return result;
+    }
+
+    @Override
+    public List<T2TFTestCase> getTestSuitesTestCases(T2TFTestSuite testSuite) {
+         Map<String,Object> parameters = new HashMap<String,Object>();
+        List<T2TFTestCase> result = namedParameterJdbcTemplate.query("SELECT * FROM testcases WHERE userName='"+testSuite.getUserName()+"' AND projectName = '"+testSuite.getProjectName()+"' AND testSuiteName = '"+testSuite.getTestSuiteName()+"'", parameters, rowMapperTestCase);
+        return result;
+    }
     
 }
