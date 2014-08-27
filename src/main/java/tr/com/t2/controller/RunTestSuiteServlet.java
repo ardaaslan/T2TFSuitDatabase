@@ -6,10 +6,11 @@
 
 package tr.com.t2.controller;
 
-import com.google.gson.Gson;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,16 +21,13 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import tr.com.t2.domain.T2TFProject;
-import tr.com.t2.domain.T2TFTestCase;
-import tr.com.t2.domain.T2TFTestSuite;
-import tr.com.t2.domain.T2TFUser;
 import tr.com.t2.service.IUserService;
 
 /**
  *
  * @author Arda
  */
-public class OnLoadServlet extends HttpServlet {
+public class RunTestSuiteServlet extends HttpServlet {
        
     @Autowired
     IUserService userService;
@@ -67,45 +65,25 @@ public class OnLoadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String userInfo = request.getParameter("userInfo");
-        ObjectMapper mapper = new ObjectMapper();
-        T2TFUser newUser = mapper.readValue(userInfo, T2TFUser.class);
-        List<T2TFProject> allProjects =  userService.getUsersProjects(newUser.getUserName());
-
-    Gson gson = new Gson();
-String json = gson.toJson(allProjects);
-
-response.setContentType("Application/json");
-response.getWriter().write(json);
-
-       
-       }
-      
-
     
+    Process p;
+        p = Runtime.getRuntime().exec("cmd /c mycmd.bat",null,new File("C:\\Users\\Arda\\Desktop\\Selenium"));
+        try {
+            p.waitFor();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RunTestSuiteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    p.destroy();
 
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-    
 
-   
-    public void test(String projectID)
-    {
-   
-        T2TFProject a = new T2TFProject();
-        a.setProjectName(projectID);
-        a.setUserName("zarda");
-        userService.createProject(a);
-      
-    }
+
+
+}
 }

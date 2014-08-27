@@ -64,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             
-            if (username.length() == 0) {
+            if (username!=null &&username.length() == 0) {
                 RequestDispatcher rs = request.getRequestDispatcher("registerpage.html");
                 out.println("<font color=");
                 out.println('"');
@@ -81,7 +81,7 @@ public class RegisterServlet extends HttpServlet {
                 out.println("</font>");
                 
                 rs.include(request, response);
-            } else if (password.length() == 0) {
+            } else if (password!=null&&password.length() == 0) {
                 RequestDispatcher rs = request.getRequestDispatcher("registerpage.html");
 
                 out.println("<font color=");
@@ -99,7 +99,10 @@ public class RegisterServlet extends HttpServlet {
                 out.println("</font>");
                 rs.include(request, response);
             } else {
-                
+                if(username == null && password == null){
+                    RequestDispatcher rs = request.getRequestDispatcher("registerpage.html");
+                    rs.include(request, response);
+                }
                 if(userService.ifUserExists(username)){
                     errorFlag = true;
                 }
@@ -112,7 +115,7 @@ public class RegisterServlet extends HttpServlet {
                 }
                 
                 
-                if(errorFlag == false){ //SEeelam yaktın beni hain :c
+                if(errorFlag == false){ 
                     flag = 0;
                     errorFlag = false;
                     response.sendRedirect("LoginServlet");

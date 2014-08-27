@@ -20,6 +20,10 @@
         <servlet-class>tr.com.t2.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>runTestSuite</servlet-name>
+        <servlet-class>tr.com.t2.controller.RunTestSuiteServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>mainPageServlet</servlet-name>
         <servlet-class>tr.com.t2.controller.MainPageServlet</servlet-class>
     </servlet>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>runTestSuite</servlet-name>
+        <url-pattern>/RunTestSuite</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>onLoadServlet</servlet-name>
