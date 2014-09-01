@@ -307,6 +307,7 @@
         </form>
 	</div>
 </div>
+        <input type="file" style="visibility: hidden;margin-right: 150px;"  id="refFile" onchange="handleFileSelect(this.files[0])"/>
 
         <!-- End of the Project and Test Suite Grid-->
             <script type="text/javascript">
@@ -480,11 +481,40 @@
         <script type="text/javascript">
             function confirmCreateTestCase() {
                 document.getElementById("openModalTestCase").style.visibility = "hidden";
+                //document.getElementById("refFile").style.visibility = "visible";
+                 document.getElementById("refFile").style.cssText="display:inline-block;margin-left=150px;visibility:visible";
+  
                 createTestCase();
                // document.getElementById("testsuitegrid").style.visibility = "visible";
                //   document.getElementById("testsuitelabel").style.visibility = "visible";
             }
         </script>   
+        <script>
+  function handleFileSelect(evt) {
+    var files = evt; // FileList object
+    console.log(files);
+    // Loop through the FileList and render image files as thumbnails.
+  
+
+      // Only process image files.
+      
+
+      var reader = new FileReader();
+      var blob = files.slice(0, files.size);
+   
+    
+      
+      reader.onloadend = function() {
+      console.log(reader.readyState);
+      console.log(reader.result);
+    };
+      reader.readAsBinaryString(blob);
+     // console.log(reader.readyState);
+    
+  }
+
+  //document.getElementById('refFile').addEventListener('change', handleFileSelect, false);
+</script>
         
 <script type="text/javascript">
             function confirmProject() {
@@ -578,6 +608,7 @@
                //   document.getElementById("testsuitelabel").style.visibility = "visible";
             }
         </script>
+         
     <script>
             function runTestSuite() {
             
